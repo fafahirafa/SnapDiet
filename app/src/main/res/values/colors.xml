@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="abumuda">#ECECEC</color>
+    <color name="abu">#D9DCD8</color>
+    <color name="abutua">#989898</color>
+    <color name="hijau">#9BA747</color>
+    <color name="orenmuda">#F29D4B</color>
+    <color name="orentua">#D57030</color>
+    <color name="merah">#8B281F</color>
+</resources>

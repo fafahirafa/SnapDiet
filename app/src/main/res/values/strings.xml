@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SnapDiet</string>
+    <string name="slider1_title">Calculate your BMI</string>
+    <string name="slider1_text">First, calculate your BMI to find out your current mass index</string>
+    <string name="slider2_title">Capture your Food</string>
+    <string name="slider2_text">Second, use your camera to find out your food calories</string>
+    <string name="slider3_title">Add to Journal</string>
+    <string name="slider3_text">Save your food calories information into a journal to control your calories. Done!</string>
+    <string name="get_started">Get Started</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_camera" translatable="false">Camera</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_tips">Tips</string>
+</resources>
