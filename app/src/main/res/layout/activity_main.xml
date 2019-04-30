@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+
     </FrameLayout>
 
 
@@ -52,11 +53,9 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
-
-
-            app:itemTextColor="@color/abutua"
+            app:itemTextColor="@color/orentua"
             app:menu="@menu/nav_items"
-            app:labelVisibilityMode="unlabeled">
+            >
 
 
         </android.support.design.widget.BottomNavigationView>
@@ -74,10 +73,9 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
-
-            app:itemTextColor="@color/abutua"
+            app:itemTextColor="@color/orentua"
             app:menu="@menu/nav_items2"
-            app:labelVisibilityMode="unlabeled">
+            >
 
 
         </android.support.design.widget.BottomNavigationView>
