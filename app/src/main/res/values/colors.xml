@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#D57030</color>
+    <color name="colorPrimaryDark">#FFF</color>
     <color name="colorAccent">#D81B60</color>
     <color name="abumuda">#ECECEC</color>
     <color name="abu">#D9DCD8</color>
@@ -10,4 +10,6 @@
     <color name="orenmuda">#F29D4B</color>
     <color name="orentua">#D57030</color>
     <color name="merah">#8B281F</color>
+    <color name="putih">#FFF</color>
+
 </resources>

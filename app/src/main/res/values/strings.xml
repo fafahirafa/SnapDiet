@@ -8,9 +8,9 @@
     <string name="slider3_text">Save your food calories information into a journal to control your calories. Done!</string>
     <string name="get_started">Get Started</string>
     <string name="nav_home">Home</string>
-    <string name="nav_home">Home</string>
-    <string name="nav_home">Home</string>
-    <string name="nav_camera" translatable="false">Camera</string>
+    <string name="nav_camera">Camera</string>
+    <string name="nav_Tips">Tips</string>
+    <string name="nav_camera1" translatable="false">Camera</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_tips">Tips</string>
 </resources>

@@ -1,17 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#fff">
+    android:orientation="vertical">
 
-    <android.support.design.widget.BottomNavigationView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/putih"
+        android:foregroundGravity="top"
+        android:gravity="top">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo_snapdiet_text"/>
 
-    </android.support.design.widget.BottomNavigationView>
 
-</RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/shadow" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="0dp"
+        android:background="@color/putih">
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomnav"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+
+
+            app:itemTextColor="@color/abutua"
+            app:menu="@menu/nav_items"
+            app:labelVisibilityMode="unlabeled">
+
+
+        </android.support.design.widget.BottomNavigationView>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_icon_camera"
+            android:id="@+id/navigation_camera"
+           />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomnav1"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+
+            app:itemTextColor="@color/abutua"
+            app:menu="@menu/nav_items2"
+            app:labelVisibilityMode="unlabeled">
+
+
+        </android.support.design.widget.BottomNavigationView>
+    </LinearLayout>
+</LinearLayout>
