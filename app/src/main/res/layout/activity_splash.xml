@@ -12,9 +12,8 @@
         android:id="@+id/logoImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/logoo"
         android:layout_centerHorizontal="true"
-        />
+        android:src="@drawable/logoo" />
     <ImageView
         android:id="@+id/logoText"
         android:layout_width="wrap_content"
@@ -22,6 +21,5 @@
         android:src="@drawable/logo_orenmuda_ijo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/logoImage"
-        />
+        android:layout_below="@+id/logoImage" />
 </RelativeLayout>
