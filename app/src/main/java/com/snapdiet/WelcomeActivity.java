@@ -24,6 +24,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_welcome);
         viewPager = findViewById(R.id.view_pager);
         btnGetStarted = findViewById(R.id.btn_get_started);

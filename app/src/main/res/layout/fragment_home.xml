@@ -32,17 +32,29 @@
             />
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/layoutCalendar"
         android:orientation="vertical"
-        android:background="@color/putih"
         android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calender"
+            android:textSize="18dp"
+            android:textColor="@color/merah"
+            android:textStyle="bold"
+
+            />
 
         <CalendarView
             android:layout_width="wrap_content"
-            android:layout_height="350dp">
+            android:layout_height="350dp"
+            android:background="@color/putih"
+            >
         </CalendarView>
 
     </LinearLayout>

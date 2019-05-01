@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,10 +21,25 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottomnav);
         BottomNavigationView bottomNav1 = (BottomNavigationView) findViewById(R.id.bottomnav1);
+//        ImageView cameraNav = (ImageView) findViewById(R.id.navigation_camera);
+
         BottomNavigationViewHelper.disableShiftMode(bottomNav);
 
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         bottomNav1.setOnNavigationItemSelectedListener(navListener);
+        /**
+         * 30-04-2019
+         * Start - Add Home Fragment
+         */
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragment_container, new HomeFragment(), "SOMETAG").
+                    commit();
+        }
+        /**
+         * 30-04-2019
+         * End - Add Home Fragment
+         */
 
     }
 
