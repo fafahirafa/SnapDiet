@@ -7,6 +7,6 @@
         android:id="@+id/navigation_tips"
         android:icon="@drawable/ic_icon_tips"
         android:title="@string/tips"
-
+    android:checked="false"
         />
 </menu>

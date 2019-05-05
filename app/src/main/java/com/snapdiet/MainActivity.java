@@ -20,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottomnav);
-        BottomNavigationView bottomNav1 = (BottomNavigationView) findViewById(R.id.bottomnav1);
-//        ImageView cameraNav = (ImageView) findViewById(R.id.navigation_camera);
+//        BottomNavigationView bottomNav1 = (BottomNavigationView) findViewById(R.id.bottomnav1);
+        ImageView cameraNav = (ImageView) findViewById(R.id.navigation_camera);
 
         BottomNavigationViewHelper.disableShiftMode(bottomNav);
 
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-        bottomNav1.setOnNavigationItemSelectedListener(navListener);
+//        bottomNav1.setOnNavigationItemSelectedListener(navListener);
         /**
          * 30-04-2019
          * Start - Add Home Fragment
@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
         new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new HomeFragment();
                         break;
                     case R.id.navigation_camera:
-                        selectedFragment = new TipsFragment();
+                        selectedFragment = new CameraFragment();
                         break;
                     case R.id.navigation_tips:
                         selectedFragment = new TipsFragment();

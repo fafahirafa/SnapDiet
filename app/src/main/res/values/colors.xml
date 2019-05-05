@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#D57030</color>
     <color name="colorPrimaryDark">#D57030</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#F29D4B</color>
     <color name="abumuda">#ECECEC</color>
     <color name="abu">#D9DCD8</color>
     <color name="abutua">#989898</color>
@@ -11,5 +11,8 @@
     <color name="orentua">#D57030</color>
     <color name="merah">#8B281F</color>
     <color name="putih">#FFF</color>
+    <color name="yourSelectedColor">#D57030</color>
+    <color name="defaultColor">#989898</color>
+
 
 </resources>

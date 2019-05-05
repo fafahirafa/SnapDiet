@@ -7,7 +7,20 @@
         android:icon="@drawable/ic_icon_home"
         android:title="@string/home"
 
-        />
 
+        />
+    <item
+        android:id="@+id/navigation_camera"
+        android:icon="@drawable/ic_icon_camera"
+        android:title=""
+
+        />
+    <item
+        android:id="@+id/navigation_tips"
+        android:icon="@drawable/ic_icon_tips"
+        android:title="@string/tips"
+
+
+        />
 
 </menu>
