@@ -29,7 +29,10 @@
             android:layout_marginRight="5dp"
             android:textSize="18dp"
             android:hint="0.00 kg"
-            android:textColor="@color/orentua"/>
+            android:textColor="@color/orentua"
+            android:inputType="numberDecimal">
+            <requestFocus/>
+        </EditText>
         <TextView
             android:layout_width="200dp"
             android:layout_height="30dp"
@@ -62,7 +65,10 @@
             android:layout_marginRight="5dp"
             android:textSize="18dp"
             android:hint="0.0 cm"
-            android:textColor="@color/orentua"/>
+            android:textColor="@color/orentua"
+            android:inputType="numberDecimal">
+
+        </EditText>
         <TextView
             android:layout_width="200dp"
             android:layout_height="30dp"

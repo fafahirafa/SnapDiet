@@ -33,20 +33,18 @@
             android:textSize="14sp"
             android:textStyle="italic"
             />
-
-        <TextView
+        <Button
+            android:id="@+id/resultBMI"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="text"
-            android:textAllCaps="true"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:textColor="@color/putih"
-            android:paddingTop="13dp"
+            android:text="Please insert your height and weight"
             android:background="@drawable/button_oren"
+            android:layout_marginTop="-50dp"
+            android:textColor="@color/putih"
+            android:textSize="15sp"
             android:visibility="invisible"
-            android:id="@+id/resultBMI"
-            android:layout_marginTop="-50dp"/>
+            />
+
     </LinearLayout>
 
     <LinearLayout
