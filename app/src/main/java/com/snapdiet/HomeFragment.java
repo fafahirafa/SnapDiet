@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -45,10 +46,26 @@ public class HomeFragment extends Fragment {
     GraphView graphView;
     LineGraphSeries series;
 
+    String TAG = "HomeFragment";
+    CalendarView  mCalendarView;
+    TextView listMakanan;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mCalendarView = (CalendarView) getView().findViewById(R.id.calendar_view);
+        listMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
+
+        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                String date= (i1 + 1) + "/" + i2 + "/" + i;
+                Log.d(TAG,"onSelectedDayChange: mm/dd/yyyy:" + date);
+                listMakanan.setText(date);
+            }
+        });
+
 
         yValue = getView().findViewById(R.id.y_value);
         btn_insert = getView().findViewById(R.id.btn_insert);
