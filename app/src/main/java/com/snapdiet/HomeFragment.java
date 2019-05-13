@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference reference;
+    DatabaseReference reference1;
 
     SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");
     GraphView graphView;
@@ -50,6 +51,8 @@ public class HomeFragment extends Fragment {
     CalendarView  mCalendarView;
     TextView listMakanan;
 
+//sebenernya ini kdoingan nampilin kalo pas diklik tgl muncul tglnya berapa ex: klik tgl 14 May 2019 muncul 05-14-2019
+//tapi karena udah diotak atik jadi begini bang
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -57,16 +60,21 @@ public class HomeFragment extends Fragment {
         mCalendarView = (CalendarView) getView().findViewById(R.id.calendar_view);
         listMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
 
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("contoh").child("akun1");
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                String date= (i1 + 1) + "/" + i2 + "/" + i;
+                String date= (i1 + 1) + "-" + i2 + "-" + i;
                 Log.d(TAG,"onSelectedDayChange: mm/dd/yyyy:" + date);
-                listMakanan.setText(date);
+//                String dataPerTanggal = database.getReference("contoh").child("akun1").child(date).get.toString();
+//                listMakanan.setText(dataPerTanggal);
+                date(date);
             }
+
         });
 
-
+//Buat graphView
         yValue = getView().findViewById(R.id.y_value);
         btn_insert = getView().findViewById(R.id.btn_insert);
         graphView = getView().findViewById(R.id.graphView);
@@ -88,6 +96,37 @@ public class HomeFragment extends Fragment {
                 }else{
                     return super.formatLabel(value, isValueX);
                 }
+            }
+        });
+    }
+
+//INI KODINGAN YANG BUAT READ DATA DI FIREBASE YA BANG
+//KALO MASUK KE FIREBASENYA PAKE EMAIL fafahirafa@gmail.com pass:Xaviera16
+    private void date(final String date){
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.d(TAG, "Value is: " + value);
+                if (dataSnapshot.exists()){
+                    String dataPerTanggal = dataSnapshot.child("tanggal1").getValue(String.class);
+                    String dataKalori = dataSnapshot.child("tanggal1").child("kalori").getValue(String.class);
+                    Log.d(TAG, "onDataChange: " + dataPerTanggal + " " + dataKalori);
+                    listMakanan.setText(dataPerTanggal+" "+dataKalori);
+                } else if (!dataSnapshot.exists()) {
+                    Log.d(TAG, "onDataChange: kosong");
+                }
+             }
+
+
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
     }
