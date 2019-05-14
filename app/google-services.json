@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1088422568931",
+    "firebase_url": "https://graphview-b733e.firebaseio.com",
+    "project_id": "graphview-b733e",
+    "storage_bucket": "graphview-b733e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088422568931:android:b0f65c382b50c0a9",
+        "android_client_info": {
+          "package_name": "com.snapdiet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088422568931-v4u681a6a9g0iegkql6loppb7q5ug9aa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.snapdiet",
+            "certificate_hash": "43c27af5a7dae6605eae1ce98af5cecc9d3a34af"
+          }
+        },
+        {
+          "client_id": "1088422568931-0b2c8nivj895hi968gd0elrar9r5vclq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.snapdiet",
+            "certificate_hash": "900d5f70305b9bffe4aec3182d599987df7000b0"
+          }
+        },
+        {
+          "client_id": "1088422568931-hklvnhnnfcog90g5kgj6d90ibo09og22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU7_DfpIgQOhueCdbnmqbemjdvP1aowhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088422568931-hklvnhnnfcog90g5kgj6d90ibo09og22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

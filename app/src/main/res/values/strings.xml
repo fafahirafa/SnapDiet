@@ -8,9 +8,14 @@
     <string name="slider3_text">Save your food calories information into a journal to control your calories. Done!</string>
     <string name="get_started">Get Started</string>
     <string name="nav_home">Home</string>
-    <string name="nav_home">Home</string>
-    <string name="nav_home">Home</string>
-    <string name="nav_camera" translatable="false">Camera</string>
+    <string name="nav_camera">Camera</string>
+    <string name="nav_Tips">Tips</string>
+    <string name="nav_camera1" translatable="false">Camera</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_tips">Tips</string>
+    <string name="description">description</string>
+    <string name="calculate_bmi_kg_m2">Calculate BMI (kg/m2)</string>
+    <string name="press_to_enter_your_height">Press to enter your height</string>
+    <string name="tips">Tips</string>
+    <string name="home">Home</string>
 </resources>

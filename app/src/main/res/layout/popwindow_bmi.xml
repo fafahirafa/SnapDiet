@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:background="@drawable/background_rounded"
+    android:layout_gravity="center"
+    android:padding="30dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Berat Badan"
+        android:textColor="#000"
+        android:textSize="20dp"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/beratBadan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:textSize="18dp"
+            android:hint="0.00 kg"
+            android:textColor="@color/orentua"
+            android:inputType="numberDecimal">
+            <requestFocus/>
+        </EditText>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_weight="4"
+            android:text="kg"
+            android:background="@color/orenmuda"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:textColor="@color/putih"
+            android:paddingTop="3dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tinggi Badan"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:layout_marginTop="25dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/tinggiBadan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:textSize="18dp"
+            android:hint="0.0 cm"
+            android:textColor="@color/orentua"
+            android:inputType="numberDecimal">
+
+        </EditText>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_weight="4"
+            android:text="cm"
+            android:background="@color/orenmuda"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:textColor="@color/putih"
+            android:paddingTop="3dp"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

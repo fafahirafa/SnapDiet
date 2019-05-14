@@ -1,17 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#fff">
+    android:orientation="vertical"
+    >
 
-    <android.support.design.widget.BottomNavigationView
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/putih"
+            android:foregroundGravity="top"
+            android:gravity="top">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:src="@drawable/logo_snapdiet_text"/>
 
-    </android.support.design.widget.BottomNavigationView>
+        </android.support.v7.widget.Toolbar>
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="4dp"-->
+            <!--android:background="@drawable/shadow" />-->
+    </android.support.design.widget.AppBarLayout>
 
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@color/putih">
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomnav"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            app:menu="@menu/nav_items"
+            app:itemTextColor="@drawable/bottom_navigation_home"
+            app:itemIconTint="@drawable/bottom_navigation_home">
+        </android.support.design.widget.BottomNavigationView>
+
+
+        <!--<android.support.design.widget.BottomNavigationView-->
+            <!--android:id="@+id/bottomnav1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_weight="1"-->
+            <!--app:menu="@menu/nav_items2"-->
+            <!--app:itemTextColor="@drawable/bottom_navigation_home"-->
+            <!--app:itemIconTint="@drawable/bottom_navigation_home">-->
+        <!--</android.support.design.widget.BottomNavigationView>-->
+    </LinearLayout>
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/ic_icon_camera"
+        android:id="@+id/navigation_camera"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+    </ImageView>
 </RelativeLayout>

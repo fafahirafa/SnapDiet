@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/putih"
+    android:orientation="vertical"
+    android:paddingTop="55dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutBMI"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calculate_bmi_kg_m2"
+            android:textSize="16sp"
+            android:textColor="@color/merah"
+            android:textStyle="bold"
+            />
+        <Button
+            android:id="@+id/btnBMI"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/press_to_enter_your_height"
+            android:background="@drawable/button"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/putih"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            />
+        <Button
+            android:id="@+id/resultBMI"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Please insert your height and weight"
+            android:background="@drawable/button_oren"
+            android:layout_marginTop="-50dp"
+            android:textColor="@color/putih"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutCalendar"
+        android:orientation="vertical"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calendar"
+            android:textSize="16sp"
+            android:textColor="@color/merah"
+            android:textStyle="bold"
+            />
+
+        <CalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </CalendarView>
+
+        <TextView
+            android:id="@+id/tv_list_makanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/btn_back_to_calendar"
+            android:hint="Coba diklik salah satu tanggalnya"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@color/putih"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grafik"
+            android:textSize="16sp"
+            android:textColor="@color/merah"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/y_value"
+            android:hint="y_value"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_insert"
+            android:text="insert"/>
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graphView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
