@@ -43,15 +43,15 @@ public class HomeFragment extends Fragment {
     DatabaseReference reference;
     DatabaseReference reference1;
 
-    SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
     GraphView graphView;
     LineGraphSeries series;
 
     String TAG = "HomeFragment";
-    CalendarView  mCalendarView;
+    CalendarView mCalendarView;
     TextView listMakanan;
 
-//sebenernya ini kdoingan nampilin kalo pas diklik tgl muncul tglnya berapa ex: klik tgl 14 May 2019 muncul 05-14-2019
+    //sebenernya ini kdoingan nampilin kalo pas diklik tgl muncul tglnya berapa ex: klik tgl 14 May 2019 muncul 05-14-2019
 //tapi karena udah diotak atik jadi begini bang
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -60,15 +60,12 @@ public class HomeFragment extends Fragment {
         mCalendarView = (CalendarView) getView().findViewById(R.id.calendar_view);
         listMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
 
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference("contoh").child("akun1");
+
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                String date= (i1 + 1) + "-" + i2 + "-" + i;
-                Log.d(TAG,"onSelectedDayChange: mm/dd/yyyy:" + date);
-//                String dataPerTanggal = database.getReference("contoh").child("akun1").child(date).get.toString();
-//                listMakanan.setText(dataPerTanggal);
+                String date = (i1 + 1) + "-" + i2 + "-" + i;
+                Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy:" + date);
                 date(date);
             }
 
@@ -88,39 +85,38 @@ public class HomeFragment extends Fragment {
         setListeners();
 
         graphView.getGridLabelRenderer().setNumVerticalLabels(10);
-        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
             public String formatLabel(double value, boolean isValueX) {
-                if(isValueX){
+                if (isValueX) {
                     return sdf.format(new Date((long) value));
-                }else{
+                } else {
                     return super.formatLabel(value, isValueX);
                 }
             }
         });
     }
 
-//INI KODINGAN YANG BUAT READ DATA DI FIREBASE YA BANG
+    //INI KODINGAN YANG BUAT READ DATA DI FIREBASE YA BANG
 //KALO MASUK KE FIREBASENYA PAKE EMAIL fafahirafa@gmail.com pass:Xaviera16
-    private void date(final String date){
+    private void date(final String date) {
 
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("contoh").child("akun1").child(date);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d(TAG, "Value is: " + value);
-                if (dataSnapshot.exists()){
-                    String dataPerTanggal = dataSnapshot.child("tanggal1").getValue(String.class);
-                    String dataKalori = dataSnapshot.child("tanggal1").child("kalori").getValue(String.class);
-                    Log.d(TAG, "onDataChange: " + dataPerTanggal + " " + dataKalori);
-                    listMakanan.setText(dataPerTanggal+" "+dataKalori);
-                } else if (!dataSnapshot.exists()) {
-                    Log.d(TAG, "onDataChange: kosong");
-                }
-             }
 
+                if(dataSnapshot.exists()){
+                    DataList dataList = dataSnapshot.getValue(DataList.class);
+                    String dataPerTanggal = dataSnapshot.getKey();
+                    String dataKalori = String.valueOf(dataList.getKalori());
+                    String dataBerat = String.valueOf(dataList.getBerat());
+                    listMakanan.setText("Berat = " + dataBerat + " Kalori = " + dataKalori);
+                }
+
+
+            }
 
 
             @Override
@@ -138,7 +134,7 @@ public class HomeFragment extends Fragment {
                 String id = reference.push().getKey();
                 long x = new Date().getTime();
                 int y = Integer.parseInt(yValue.getText().toString());
-                PointValue pointValue = new PointValue(x,y);
+                PointValue pointValue = new PointValue(x, y);
                 reference.child(id).setValue(pointValue);
                 graphView.getViewport().setScalable(true);
                 graphView.getViewport().setScrollable(true);
@@ -154,9 +150,9 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DataPoint[] dp = new DataPoint[(int) dataSnapshot.getChildrenCount()];
                 int index = 0;
-                for (DataSnapshot myDataSnapshot:dataSnapshot.getChildren()){
+                for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
                     PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
-                    dp[index] = new DataPoint(pointValue.getxValue(),pointValue.getyValue());
+                    dp[index] = new DataPoint(pointValue.getxValue(), pointValue.getyValue());
                     index++;
                 }
                 series.resetData(dp);
@@ -200,7 +196,7 @@ public class HomeFragment extends Fragment {
                                 String tinggiStr = tinggiBadan.getText().toString();
 
                                 if (tinggiStr != null && !"".equals(tinggiStr) && beratStr != null && !"".equals(beratStr)) {
-                                    float tinggiValue = Float.parseFloat(tinggiStr)/100;
+                                    float tinggiValue = Float.parseFloat(tinggiStr) / 100;
                                     float beratValue = Float.parseFloat(beratStr);
 
                                     float bmiValue = calculateBMI(beratValue, tinggiValue);
@@ -213,7 +209,7 @@ public class HomeFragment extends Fragment {
                             }
 
                             private float calculateBMI(float beratValue, float tinggiValue) {
-                                return (float)(beratValue /(tinggiValue * tinggiValue));
+                                return (float) (beratValue / (tinggiValue * tinggiValue));
                             }
 
                             private String interpretBMI(float bmiValue) {
@@ -227,11 +223,11 @@ public class HomeFragment extends Fragment {
                                     return "Normal (Healthy Weight)";
                                 } else if (bmiValue > 25 && bmiValue <= 30) {
                                     return "Overweight";
-                                }else if(bmiValue > 30 && bmiValue <= 35 ) {
+                                } else if (bmiValue > 30 && bmiValue <= 35) {
                                     return "Obese Level I";
-                                }else if(bmiValue > 35 && bmiValue <= 45 ) {
+                                } else if (bmiValue > 35 && bmiValue <= 45) {
                                     return "Obese Level II";
-                                }else{
+                                } else {
                                     return "Obese Level III";
                                 }
 
@@ -250,7 +246,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
 
 
         hasilBMI.setOnClickListener(new View.OnClickListener() {
@@ -275,7 +270,7 @@ public class HomeFragment extends Fragment {
                                 String tinggiStr = tinggiBadan.getText().toString();
 
                                 if (tinggiStr != null && !"".equals(tinggiStr) && beratStr != null && !"".equals(beratStr)) {
-                                    float tinggiValue = Float.parseFloat(tinggiStr)/100;
+                                    float tinggiValue = Float.parseFloat(tinggiStr) / 100;
                                     float beratValue = Float.parseFloat(beratStr);
 
                                     float bmiValue = calculateBMI(beratValue, tinggiValue);
@@ -288,7 +283,7 @@ public class HomeFragment extends Fragment {
                             }
 
                             private float calculateBMI(float beratValue, float tinggiValue) {
-                                return (float)(beratValue /(tinggiValue * tinggiValue));
+                                return (float) (beratValue / (tinggiValue * tinggiValue));
                             }
 
                             private String interpretBMI(float bmiValue) {
@@ -302,11 +297,11 @@ public class HomeFragment extends Fragment {
                                     return "Normal (Healthy Weight)";
                                 } else if (bmiValue > 25 && bmiValue <= 30) {
                                     return "Overweight";
-                                }else if(bmiValue > 30 && bmiValue <= 35 ) {
+                                } else if (bmiValue > 30 && bmiValue <= 35) {
                                     return "Obese Level I";
-                                }else if(bmiValue > 35 && bmiValue <= 45 ) {
+                                } else if (bmiValue > 35 && bmiValue <= 45) {
                                     return "Obese Level II";
-                                }else{
+                                } else {
                                     return "Obese Level III";
                                 }
 
