@@ -113,6 +113,8 @@ public class HomeFragment extends Fragment {
                     String dataKalori = String.valueOf(dataList.getKalori());
                     String dataBerat = String.valueOf(dataList.getBerat());
                     listMakanan.setText("Berat = " + dataBerat + " Kalori = " + dataKalori);
+                } else {
+                    listMakanan.setText("No data exist");
                 }
 
 
