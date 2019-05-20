@@ -1,15 +1,15 @@
 package com.snapdiet;
 
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
+
 import android.content.DialogInterface;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,24 +27,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static android.content.ContentValues.TAG;
 
 public class HomeFragment extends Fragment {
 
-    EditText yValue;
-    Button btn_insert;
-
     FirebaseDatabase database;
     DatabaseReference reference;
-    DatabaseReference reference1;
-
-    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+    String userId;
+    SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy");
     GraphView graphView;
     LineGraphSeries series;
 
@@ -71,38 +68,32 @@ public class HomeFragment extends Fragment {
 
         });
 
-//Buat graphView
-        yValue = getView().findViewById(R.id.y_value);
-        btn_insert = getView().findViewById(R.id.btn_insert);
+        //Buat graphView
         graphView = getView().findViewById(R.id.graphView);
 
         series = new LineGraphSeries();
         graphView.addSeries(series);
 
+        Activity activity = (MainActivity) getActivity();
+        userId = ((MainActivity) activity).getUserId();
+        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("chartTable");
+        reference = database.getReference("journal");
 
-        setListeners();
+//        setListeners();
 
         graphView.getGridLabelRenderer().setNumVerticalLabels(10);
-        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
-            @Override
-            public String formatLabel(double value, boolean isValueX) {
-                if (isValueX) {
-                    return sdf.format(new Date((long) value));
-                } else {
-                    return super.formatLabel(value, isValueX);
-                }
-            }
-        });
+        graphView.getViewport().setScalable(true);
+        graphView.getViewport().setScrollable(true);
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+
     }
 
-    //INI KODINGAN YANG BUAT READ DATA DI FIREBASE YA BANG
-//KALO MASUK KE FIREBASENYA PAKE EMAIL fafahirafa@gmail.com pass:Xaviera16
+    //ini udah pake strutktur journal, tolong diusahakan readnya yak
     private void date(final String date) {
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("contoh").child("akun1").child(date);
+        reference = database.getReference("journal").child(userId).child(date);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
@@ -129,32 +120,24 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void setListeners() {
-        btn_insert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String id = reference.push().getKey();
-                long x = new Date().getTime();
-                int y = Integer.parseInt(yValue.getText().toString());
-                PointValue pointValue = new PointValue(x, y);
-                reference.child(id).setValue(pointValue);
-                graphView.getViewport().setScalable(true);
-                graphView.getViewport().setScrollable(true);
-            }
-        });
-    }
-
     @Override
     public void onStart() {
         super.onStart();
+        long x = new Date().getTime();
+        String tanggal = sdf.format(x);
+        reference = database.getReference("journal").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DataPoint[] dp = new DataPoint[(int) dataSnapshot.getChildrenCount()];
                 int index = 0;
+
                 for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
+                    Toast.makeText(getActivity(), ""+sdf.format(new Date()), Toast.LENGTH_SHORT).show();
                     PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
-                    dp[index] = new DataPoint(pointValue.getxValue(), pointValue.getyValue());
+//                    long x = myDataSnapshot.getValue(Long.class);
+//                    int kalori = myDataSnapshot.child("kalori").getValue(Integer.class);
+                    dp[index] = new DataPoint(pointValue.getxValue(), pointValue.getKalori());
                     index++;
                 }
                 series.resetData(dp);

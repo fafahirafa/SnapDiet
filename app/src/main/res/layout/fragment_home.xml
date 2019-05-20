@@ -101,18 +101,6 @@
             android:textStyle="bold"
             />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/y_value"
-            android:hint="y_value"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_insert"
-            android:text="insert"/>
-
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graphView"
             android:layout_width="match_parent"
