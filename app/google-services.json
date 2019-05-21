@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1088422568931-u39m7f47idf520qamr83udc96j4m88t3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.snapdiet",
+            "certificate_hash": "18d05cf8d6f69276093a63d73b185cf0f27dabfb"
+          }
+        },
+        {
           "client_id": "1088422568931-v4u681a6a9g0iegkql6loppb7q5ug9aa.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

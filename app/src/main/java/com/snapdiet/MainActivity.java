@@ -1,7 +1,11 @@
 package com.snapdiet;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Camera;
 import android.graphics.Color;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
@@ -10,23 +14,38 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+
 public class MainActivity extends AppCompatActivity {
+
+    ImageView cameraNav;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    String userId;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent a = getIntent();
+        userId = a.getStringExtra("userid");
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("journal");
+
+
+
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottomnav);
-//        BottomNavigationView bottomNav1 = (BottomNavigationView) findViewById(R.id.bottomnav1);
-        ImageView cameraNav = (ImageView) findViewById(R.id.navigation_camera);
 
         BottomNavigationViewHelper.disableShiftMode(bottomNav);
-
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-//        bottomNav1.setOnNavigationItemSelectedListener(navListener);
 
         /**
          * 30-04-2019
@@ -42,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
          * End - Add Home Fragment
          */
 
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

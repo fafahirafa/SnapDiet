@@ -18,4 +18,5 @@
     <string name="press_to_enter_your_height">Press to enter your height</string>
     <string name="tips">Tips</string>
     <string name="home">Home</string>
+    <string name="camera_error">Camera Error</string>
 </resources>

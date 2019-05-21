@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
     List<String> text = new ArrayList<>();
     ImageView dot1,dot2,dot3;
     Button btnGetStarted;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,9 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         viewPager = findViewById(R.id.view_pager);
         btnGetStarted = findViewById(R.id.btn_get_started);
+
+        Intent a = getIntent();
+        userId = a.getStringExtra("userid");
 
         dot1= findViewById(R.id.indicator1);
         dot2= findViewById(R.id.indicator2);
@@ -80,10 +85,9 @@ public class WelcomeActivity extends AppCompatActivity {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                intent.putExtra("userid", userId);
                 startActivity(intent);
-
             }
         });
     }
