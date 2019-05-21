@@ -237,10 +237,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                   public void run() {
                     showLabel(label);
                     switch(label){
-                      case "apple":
+                      case "apel":
                         showLabelScore("120");
                         break;
-                      case "strawberry":
+                      case "stroberi":
                         showLabelScore("100");
                         break;
                       case "pizza":

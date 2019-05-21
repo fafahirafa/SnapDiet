@@ -85,13 +85,13 @@ public class HomeFragment extends Fragment {
         graphView.getGridLabelRenderer().setNumVerticalLabels(10);
         graphView.getViewport().setScalable(true);
         graphView.getViewport().setScrollable(true);
-        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
-            public String formatLabel(double value, boolean isvalueX) {
-                if (isvalueX) {
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX) {
                     return sdf.format(new Date((long) value));
-                }else {
-                    return formatLabel(value, isvalueX);
+                } else {
+                    return super.formatLabel(value, isValueX);
                 }
             }
         });
