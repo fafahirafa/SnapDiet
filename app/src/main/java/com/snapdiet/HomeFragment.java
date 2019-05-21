@@ -85,7 +85,16 @@ public class HomeFragment extends Fragment {
         graphView.getGridLabelRenderer().setNumVerticalLabels(10);
         graphView.getViewport().setScalable(true);
         graphView.getViewport().setScrollable(true);
-        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+            @Override
+            public String formatLabel(double value, boolean isvalueX) {
+                if (isvalueX) {
+                    return sdf.format(new Date((long) value));
+                }else {
+                    return formatLabel(value, isvalueX);
+                }
+            }
+        });
 
     }
 
@@ -135,8 +144,6 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
                     Toast.makeText(getActivity(), ""+sdf.format(new Date()), Toast.LENGTH_SHORT).show();
                     PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
-//                    long x = myDataSnapshot.getValue(Long.class);
-//                    int kalori = myDataSnapshot.child("kalori").getValue(Integer.class);
                     dp[index] = new DataPoint(pointValue.getxValue(), pointValue.getKalori());
                     index++;
                 }
