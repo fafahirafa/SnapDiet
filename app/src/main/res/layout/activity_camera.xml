@@ -87,6 +87,11 @@
                     android:gravity="right"
                     android:text="Label Calories"
                     android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/textTotalKalori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

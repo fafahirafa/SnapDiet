@@ -80,16 +80,15 @@ public class HomeFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("journal");
 
-//        setListeners();
-
-        graphView.getGridLabelRenderer().setNumVerticalLabels(10);
+//        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(7);
         graphView.getViewport().setScalable(true);
         graphView.getViewport().setScrollable(true);
         graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
-                    return sdf.format(new Date((long) value));
+                    return String.valueOf((int)value);
                 } else {
                     return super.formatLabel(value, isValueX);
                 }
@@ -102,24 +101,28 @@ public class HomeFragment extends Fragment {
     private void date(final String date) {
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("journal").child(userId).child(date);
+        reference = database.getReference("journal").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists()){
-                    DataList dataList = dataSnapshot.getValue(DataList.class);
-                    String dataPerTanggal = dataSnapshot.getKey();
-                    String dataKalori = String.valueOf(dataList.getKalori());
-                    String dataBerat = String.valueOf(dataList.getBerat());
-                    listMakanan.setText("Berat = " + dataBerat + " Kalori = " + dataKalori);
+                int kalori = 0;
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
+                        String inputKey = myDataSnapshot.getKey();
+                        PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
+                        String tanggal = String.valueOf(pointValue.getTanggal());
+                        if (tanggal.equals(date)) {
+                            final int kalori1 = pointValue.getKalori();
+                            kalori = kalori + kalori1;
+                        } else {
+                            kalori = kalori + 0;
+                        }
+                        listMakanan.setText(" Kalori = " + kalori);
+                    }
                 } else {
-                    listMakanan.setText("No data exist");
+                    listMakanan.setText("no data exist");
                 }
-
-
             }
-
 
             @Override
             public void onCancelled(DatabaseError error) {
@@ -142,9 +145,10 @@ public class HomeFragment extends Fragment {
                 int index = 0;
 
                 for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
-                    Toast.makeText(getActivity(), ""+sdf.format(new Date()), Toast.LENGTH_SHORT).show();
                     PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
-                    dp[index] = new DataPoint(pointValue.getxValue(), pointValue.getKalori());
+                    final int todayDate = pointValue.getTodayDate();
+                    final int totalKalori = pointValue.getTotalKalori();
+                    dp[index] = new DataPoint(todayDate, totalKalori);
                     index++;
                 }
                 series.resetData(dp);

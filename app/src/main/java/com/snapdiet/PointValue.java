@@ -1,10 +1,12 @@
 package com.snapdiet;
 
 
+import java.util.Date;
+
 public class PointValue {
 
     long xValue;
-    int kalori;
+    int kalori, totalKalori, todayDate;
     float berat;
     String tanggal, idInput;
 
@@ -36,6 +38,16 @@ public class PointValue {
         this.berat = berat;
         this.tanggal = tanggal;
         this.idInput = idInput;
+    }
+
+    public PointValue(long xValue, int kalori, int totalKalori, float berat, String tanggal, String idInput) {
+        this.xValue = xValue;
+        this.kalori = kalori;
+        this.totalKalori = totalKalori;
+        this.berat = berat;
+        this.tanggal = tanggal;
+        this.idInput = idInput;
+        this.todayDate = new Date().getDate();
     }
 
     public String getIdInput() {
@@ -76,5 +88,21 @@ public class PointValue {
 
     public void setKalori(int kalori) {
         this.kalori = kalori;
+    }
+
+    public int getTotalKalori() {
+        return totalKalori;
+    }
+
+    public void setTotalKalori(int totalKalori) {
+        this.totalKalori = totalKalori;
+    }
+
+    public int getTodayDate() {
+        return todayDate;
+    }
+
+    public void setTodayDate(int todayDate) {
+        this.todayDate = todayDate;
     }
 }
