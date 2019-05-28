@@ -32,6 +32,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment {
 
     String TAG = "HomeFragment";
     CalendarView mCalendarView;
-    TextView listMakanan;
+    TextView tvListMakanan, tvTotalKalori;
 
     //sebenernya ini kdoingan nampilin kalo pas diklik tgl muncul tglnya berapa ex: klik tgl 14 May 2019 muncul 05-14-2019
 //tapi karena udah diotak atik jadi begini bang
@@ -55,7 +56,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mCalendarView = (CalendarView) getView().findViewById(R.id.calendar_view);
-        listMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
+        tvListMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
+        tvTotalKalori = (TextView) getView().findViewById(R.id.tv_total_kalori);
 
 
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -106,6 +108,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 int kalori = 0;
+                ArrayList<String> listMakanan = new ArrayList<String>();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
                         String inputKey = myDataSnapshot.getKey();
@@ -113,14 +116,18 @@ public class HomeFragment extends Fragment {
                         String tanggal = String.valueOf(pointValue.getTanggal());
                         if (tanggal.equals(date)) {
                             final int kalori1 = pointValue.getKalori();
+                            final String makanan = pointValue.getNamaMakanan();
+                            listMakanan.add(makanan + ", ");
                             kalori = kalori + kalori1;
                         } else {
                             kalori = kalori + 0;
                         }
-                        listMakanan.setText(" Kalori = " + kalori);
+                        tvTotalKalori.setText("" + kalori);
+                        tvListMakanan.setText(listMakanan.toString());
                     }
                 } else {
-                    listMakanan.setText("no data exist");
+                    tvListMakanan.setText("no data exist");
+                    tvTotalKalori.setText("no data exist");
                 }
             }
 

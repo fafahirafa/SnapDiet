@@ -70,15 +70,61 @@
             >
         </CalendarView>
 
-        <TextView
-            android:id="@+id/tv_list_makanan"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginBottom="25dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/btn_back_to_calendar"
-            android:hint="Coba diklik salah satu tanggalnya"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Foods"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/tv_list_makanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:hint="List makanan"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calories"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/tv_total_kalori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:hint="List makanan"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

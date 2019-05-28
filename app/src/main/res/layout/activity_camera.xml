@@ -103,19 +103,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add to Journal"
-                    android:layout_marginRight="20dp"
                     android:padding="10dp"
                     android:textColor="#fff"
                     android:background="@drawable/button_oren"/>
-                <Button
-                    android:id="@+id/btn_save_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Save Photo"
-                    android:textColor="#fff"
-                    android:padding="10dp"
-                    android:background="@drawable/button_oren"
-                    android:layout_margin="20dp"/>
 
             </LinearLayout>
         </LinearLayout>

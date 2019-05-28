@@ -8,7 +8,7 @@ public class PointValue {
     long xValue;
     int kalori, totalKalori, todayDate;
     float berat;
-    String tanggal, idInput;
+    String tanggal, idInput, namaMakanan;
 
     public PointValue(){
 
@@ -48,6 +48,17 @@ public class PointValue {
         this.tanggal = tanggal;
         this.idInput = idInput;
         this.todayDate = new Date().getDate();
+    }
+
+    public PointValue(long xValue, int kalori, int totalKalori, float berat, String tanggal, String idInput, String namaMakanan) {
+        this.xValue = xValue;
+        this.kalori = kalori;
+        this.totalKalori = totalKalori;
+        this.todayDate = new Date().getDate();
+        this.berat = berat;
+        this.tanggal = tanggal;
+        this.idInput = idInput;
+        this.namaMakanan = namaMakanan;
     }
 
     public String getIdInput() {
@@ -104,5 +115,13 @@ public class PointValue {
 
     public void setTodayDate(int todayDate) {
         this.todayDate = todayDate;
+    }
+
+    public String getNamaMakanan() {
+        return namaMakanan;
+    }
+
+    public void setNamaMakanan(String namaMakanan) {
+        this.namaMakanan = namaMakanan;
     }
 }

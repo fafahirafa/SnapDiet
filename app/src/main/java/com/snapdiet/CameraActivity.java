@@ -118,7 +118,6 @@ public abstract class CameraActivity extends AppCompatActivity
     labelScoreTextView = findViewById(R.id.label_score);
     totalKaloriTextView = findViewById(R.id.textTotalKalori);
     addToJournalButton = findViewById(R.id.btn_add_to_journal);
-    savePhotoButton = findViewById(R.id.btn_save_photo);
 
     Intent a = getIntent();
     userId = a.getStringExtra("userid");
