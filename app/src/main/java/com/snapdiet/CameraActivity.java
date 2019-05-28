@@ -168,7 +168,8 @@ public abstract class CameraActivity extends AppCompatActivity
           String id = reference.push().getKey();
           long x = new Date().getTime();
           int y = Integer.parseInt(labelScoreTextView.getText().toString());
-          PointValue pointValue = new PointValue(x, y, y + totalKalori, 0, sdf.format(x), id);
+          String namaMakanan = labelTextView.getText().toString();
+          PointValue pointValue = new PointValue(x, y, y + totalKalori, 0, sdf.format(x), id, namaMakanan);
           reference.child(userId).child(id).setValue(pointValue);
           Toast.makeText(CameraActivity.this, "Successfully added calories information to journal!", Toast.LENGTH_SHORT).show();
         } else {

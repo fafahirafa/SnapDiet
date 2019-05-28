@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
                         String tanggal = String.valueOf(pointValue.getTanggal());
                         if (tanggal.equals(date)) {
                             final int kalori1 = pointValue.getKalori();
-                            final String makanan = pointValue.getNamaMakanan();
+                            String makanan = pointValue.getNamaMakanan();
                             listMakanan.add(makanan + ", ");
                             kalori = kalori + kalori1;
                         } else {
