@@ -117,13 +117,16 @@ public class HomeFragment extends Fragment {
                         if (tanggal.equals(date)) {
                             final int kalori1 = pointValue.getKalori();
                             String makanan = pointValue.getNamaMakanan();
-                            listMakanan.add(makanan + ", ");
+                            if (!makanan.equals(""))
+                                listMakanan.add(makanan + ", ");
                             kalori = kalori + kalori1;
                         } else {
                             kalori = kalori + 0;
                         }
                         tvTotalKalori.setText("" + kalori);
-                        tvListMakanan.setText(listMakanan.toString());
+                        tvListMakanan.setText(listMakanan.toString()
+                                .replace("[", "")
+                                .replace("]",""));
                     }
                 } else {
                     tvListMakanan.setText("no data exist");
