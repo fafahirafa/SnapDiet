@@ -174,6 +174,7 @@ public abstract class CameraActivity extends AppCompatActivity
           Toast.makeText(CameraActivity.this, "Successfully added calories information to journal!", Toast.LENGTH_SHORT).show();
         } else {
           Toast.makeText(CameraActivity.this, "Press again to add to journal!", Toast.LENGTH_SHORT).show();
+          totalKalori = 1;
         }
       }
     });

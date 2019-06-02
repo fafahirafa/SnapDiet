@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("journal");
 
-//        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(7);
         graphView.getViewport().setScalable(true);
         graphView.getViewport().setScrollable(true);
@@ -99,7 +99,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    //ini udah pake strutktur journal, tolong diusahakan readnya yak
     private void date(final String date) {
 
         database = FirebaseDatabase.getInstance();
@@ -116,9 +115,9 @@ public class HomeFragment extends Fragment {
                         String tanggal = String.valueOf(pointValue.getTanggal());
                         if (tanggal.equals(date)) {
                             final int kalori1 = pointValue.getKalori();
-                            String makanan = pointValue.getNamaMakanan();
-                            if (!makanan.equals(""))
-                                listMakanan.add(makanan + ", ");
+                            final String makanan = pointValue.getNamaMakanan();
+                            if (!makanan.isEmpty())
+                                listMakanan.add(makanan);
                             kalori = kalori + kalori1;
                         } else {
                             kalori = kalori + 0;
@@ -145,8 +144,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        long x = new Date().getTime();
-        String tanggal = sdf.format(x);
         reference = database.getReference("journal").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
