@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1 + 1) + "-" + i2 + "-" + i;
+                date = sdf.format(new Date().getTime());
                 Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy:" + date);
                 date(date);
             }
