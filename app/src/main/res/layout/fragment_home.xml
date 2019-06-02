@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:gravity="center"
-                    android:hint="Tap a date on calendar"/>
+                    android:text="Tap a date on calendar"/>
             </LinearLayout>
 
             <LinearLayout
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:gravity="center"
-                    android:hint="Tap a date on calendar"/>
+                    android:text="Tap a date on calendar"/>
             </LinearLayout>
 
 

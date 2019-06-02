@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference reference;
     String userId;
-    SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("M-d-yyyy");
     GraphView graphView;
     LineGraphSeries series;
 
@@ -64,7 +64,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1 + 1) + "-" + i2 + "-" + i;
-                date = sdf.format(new Date().getTime());
                 Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy:" + date);
                 date(date);
             }

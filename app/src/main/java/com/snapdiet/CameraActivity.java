@@ -94,7 +94,7 @@ public abstract class CameraActivity extends AppCompatActivity
   private DatabaseReference reference, reference1;
   private String userId, tanggal;
   private int berat, kalori;
-  private SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy");
+  private SimpleDateFormat sdf = new SimpleDateFormat("M-d-yyyy");
 
   protected TextView labelTextView, labelScoreTextView, totalKaloriTextView;
   protected Button addToJournalButton, savePhotoButton;
