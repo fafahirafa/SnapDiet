@@ -33,6 +33,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
     DatabaseReference reference;
     String userId;
     SimpleDateFormat sdf = new SimpleDateFormat("M-d-yyyy");
+    SimpleDateFormat sdf1 = new SimpleDateFormat("d MMM");
     GraphView graphView;
     LineGraphSeries series;
 
@@ -65,6 +67,9 @@ public class HomeFragment extends Fragment {
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1 + 1) + "-" + i2 + "-" + i;
                 Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy:" + date);
+                Calendar calendar = Calendar.getInstance();
+                Date dateNow = calendar.getTime();
+                Toast.makeText(getActivity(), "" + sdf1.format(dateNow), Toast.LENGTH_SHORT).show();
                 date(date);
             }
 
@@ -90,7 +95,7 @@ public class HomeFragment extends Fragment {
             @Override
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
-                    return String.valueOf((int)value);
+                    return String.valueOf(value);
                 } else {
                     return super.formatLabel(value, isValueX);
                 }

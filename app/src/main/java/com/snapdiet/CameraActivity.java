@@ -96,8 +96,9 @@ public abstract class CameraActivity extends AppCompatActivity
   private int berat, kalori;
   private SimpleDateFormat sdf = new SimpleDateFormat("M-d-yyyy");
 
-  protected TextView labelTextView, labelScoreTextView, totalKaloriTextView;
-  protected Button addToJournalButton, savePhotoButton;
+  private TextView labelTextView, labelScoreTextView, totalKaloriTextView;
+  private ImageView imageInfo;
+  private Button addToJournalButton, savePhotoButton;
   private SwitchCompat apiSwitchCompat;
 
   @Override
@@ -116,6 +117,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
     labelTextView = findViewById(R.id.label);
     labelScoreTextView = findViewById(R.id.label_score);
+    imageInfo = findViewById(R.id.image_info);
     totalKaloriTextView = findViewById(R.id.textTotalKalori);
     addToJournalButton = findViewById(R.id.btn_add_to_journal);
 
@@ -126,6 +128,14 @@ public abstract class CameraActivity extends AppCompatActivity
     reference1 = database.getReference("journal").child(userId);
     long tgl = new Date().getTime();
     tanggal = sdf.format(tgl);
+
+    imageInfo.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Toast.makeText(CameraActivity.this, "Current detectable foods:" +
+                "banana, apple, sandwich, orange, broccoli, carrot, hot dog, pizza, donut, cake", Toast.LENGTH_SHORT).show();
+      }
+    });
 
     addToJournalButton.setOnClickListener(new View.OnClickListener() {
       int totalKalori;
