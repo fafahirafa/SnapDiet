@@ -32,6 +32,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,10 +57,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private static final int TF_OD_API_INPUT_SIZE = 300;
   private static final boolean TF_OD_API_IS_QUANTIZED = true;
   private static final String TF_OD_API_MODEL_FILE = "detect.tflite";
-  private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/labelmap_test.txt";
+  private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/labelmap.txt";
   private static final DetectorMode MODE = DetectorMode.TF_OD_API;
   // Minimum detection confidence to track a detection.
-  private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
+  private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.6f;
   private static final boolean MAINTAIN_ASPECT = false;
   private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
   private static final boolean SAVE_PREVIEW_BITMAP = false;
@@ -86,6 +88,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   private BorderedText borderedText;
   private String label;
+  private String[] foods = {"banana", "apple", "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake"};
 
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
@@ -217,12 +220,14 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
               final RectF location = result.getLocation();
               if (location != null && result.getConfidence() >= minimumConfidence) {
                 canvas.drawRect(location, paint);
-                label=result.getTitle();
+                label = result.getTitle();
 
                 cropToFrameTransform.mapRect(location);
 
                 result.setLocation(location);
-                mappedRecognitions.add(result);
+                if (Arrays.asList(foods).contains(label)) {
+                  mappedRecognitions.add(result);
+                }
               }
             }
 
@@ -235,16 +240,36 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 new Runnable() {
                   @Override
                   public void run() {
-                    showLabel(label);
-                    switch(label){
-                      case "apel":
-                        showLabelScore("120");
-                        break;
-                      case "stroberi":
-                        showLabelScore("100");
-                        break;
-                      case "pizza":
-                        showLabelScore("500");
+                    if (label != null && Arrays.asList(foods).contains(label)) {
+                      showLabel(label);
+                      switch (label) {
+                        case "apple":
+                          showLabelScore("120");
+                          break;
+                        case "banana":
+                          showLabelScore("100");
+                          break;
+                        case "orange":
+                          showLabelScore("80");
+                          break;
+                        case "broccoli":
+                          showLabelScore("150");
+                          break;
+                        case "carrot":
+                          showLabelScore("110");
+                          break;
+                        case "sandwich":
+                          showLabelScore("250");
+                          break;
+                        case "pizza":
+                          showLabelScore("500");
+                          break;
+                        case "cake":
+                          showLabelScore("400");
+                          break;
+                        case "donut":
+                          showLabelScore("500");
+                      }
                     }
                   }
                 });

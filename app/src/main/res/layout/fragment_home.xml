@@ -13,14 +13,24 @@
         android:id="@+id/layoutBMI"
         android:orientation="vertical"
         android:layout_margin="20dp">
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/calculate_bmi_kg_m2"
-            android:textSize="16sp"
-            android:textColor="@color/merah"
-            android:textStyle="bold"
-            />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/calculate_bmi_kg_m2"
+                android:textSize="16sp"
+                android:textColor="@color/merah"
+                android:textStyle="bold"
+                />
+            <ImageView
+                android:id="@+id/image_info_bmi"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/information"/>
+        </LinearLayout>
         <Button
             android:id="@+id/btnBMI"
             android:layout_width="match_parent"
@@ -66,19 +76,65 @@
         <CalendarView
             android:id="@+id/calendar_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-        </CalendarView>
+            android:layout_height="match_parent"/>
 
-        <TextView
-            android:id="@+id/tv_list_makanan"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginBottom="25dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/btn_back_to_calendar"
-            android:hint="Coba diklik salah satu tanggalnya"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Foods"
+                    android:textColor="@color/hijau"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/tv_list_makanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:text="Tap a date on calendar"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calories"
+                    android:textColor="@color/orenmuda"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/tv_total_kalori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:text="Tap a date on calendar"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -103,7 +159,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Grafik"
+            android:text="Graph"
             android:textSize="16sp"
             android:textColor="@color/merah"
             android:textStyle="bold"
@@ -114,7 +170,5 @@
             android:layout_width="match_parent"
             android:layout_height="250dp" />
     </LinearLayout>
-
-
 
 </LinearLayout>

@@ -61,6 +61,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.snapdiet.env.ImageUtils;
@@ -91,13 +92,14 @@ public abstract class CameraActivity extends AppCompatActivity
   private Runnable imageConverter;
 
   private FirebaseDatabase database;
-  private DatabaseReference reference;
+  private DatabaseReference reference, reference1;
   private String userId, tanggal;
   private int berat, kalori;
-  private SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy");
+  private SimpleDateFormat sdf = new SimpleDateFormat("M-d-yyyy");
 
-  protected TextView labelTextView, labelScoreTextView;
-  protected Button addToJournalButton, savePhotoButton;
+  private TextView labelTextView, labelScoreTextView, totalKaloriTextView;
+  private ImageView imageInfo;
+  private Button addToJournalButton, savePhotoButton;
   private SwitchCompat apiSwitchCompat;
 
   @Override
@@ -116,25 +118,76 @@ public abstract class CameraActivity extends AppCompatActivity
 
     labelTextView = findViewById(R.id.label);
     labelScoreTextView = findViewById(R.id.label_score);
+    imageInfo = findViewById(R.id.image_info);
+    totalKaloriTextView = findViewById(R.id.textTotalKalori);
     addToJournalButton = findViewById(R.id.btn_add_to_journal);
-    savePhotoButton = findViewById(R.id.btn_save_photo);
 
     Intent a = getIntent();
     userId = a.getStringExtra("userid");
     database = FirebaseDatabase.getInstance();
     reference = database.getReference("journal");
+    reference1 = database.getReference("journal").child(userId);
     long tgl = new Date().getTime();
     tanggal = sdf.format(tgl);
 
+    imageInfo.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Toast.makeText(CameraActivity.this, "Current detectable foods:" +
+                "banana, apple, sandwich, orange, broccoli, carrot, hot dog, pizza, donut, cake", Toast.LENGTH_SHORT).show();
+      }
+    });
+
     addToJournalButton.setOnClickListener(new View.OnClickListener() {
+      int totalKalori;
       @Override
       public void onClick(View v) {
-        String id = reference.push().getKey();
-        long x = new Date().getTime();
-        int y = Integer.parseInt(labelScoreTextView.getText().toString());
-        PointValue pointValue = new PointValue(x, y, 0, sdf.format(x), id);
-        reference.child(userId).child(tanggal).setValue(pointValue);
-        Toast.makeText(CameraActivity.this, "Successfully added calories information to journal!", Toast.LENGTH_SHORT).show();
+        reference1.addValueEventListener(new ValueEventListener() {
+          @Override
+          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            int kalori = 0;
+            if (dataSnapshot.exists()) {
+              for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
+                String inputKey = myDataSnapshot.getKey();
+                PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
+                String tanggal = String.valueOf(pointValue.getTanggal());
+                if (tanggal.equals(sdf.format(new Date().getTime()))) {
+                  final int kalori1 = pointValue.getKalori();
+                  kalori = kalori + kalori1;
+                } else {
+                  kalori = kalori + 0;
+                }
+              }
+              totalKaloriTextView.setText("" + kalori);
+              totalKalori = Integer.parseInt(totalKaloriTextView.getText().toString());
+            } else {
+//              Toast.makeText(CameraActivity.this, "No data exists.", Toast.LENGTH_SHORT).show();
+              totalKaloriTextView.setText("1");
+              totalKalori = Integer.parseInt(totalKaloriTextView.getText().toString());
+            }
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError databaseError) {
+
+          }
+        });
+
+        if (totalKalori != 0) {
+          if (totalKalori == 1)
+            totalKalori = 0;
+          String id = reference.push().getKey();
+          Calendar calendar = Calendar.getInstance();
+          Date x = calendar.getTime();
+          int y = Integer.parseInt(labelScoreTextView.getText().toString());
+          String namaMakanan = labelTextView.getText().toString();
+          PointValue pointValue = new PointValue(x, y, y + totalKalori, 0, sdf.format(x), id, namaMakanan);
+          reference.child(userId).child(id).setValue(pointValue);
+          Toast.makeText(CameraActivity.this, "Successfully added calories information to journal!", Toast.LENGTH_SHORT).show();
+        } else {
+          Toast.makeText(CameraActivity.this, "Press again to add to journal!", Toast.LENGTH_SHORT).show();
+          totalKalori = 1;
+        }
       }
     });
   }

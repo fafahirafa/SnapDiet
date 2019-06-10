@@ -35,6 +35,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.snapdiet.RecyclerViewAdapter;
@@ -45,29 +46,29 @@ public class HomeFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private String userId;
+
     private SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy");
+    private SimpleDateFormat sdf1 = new SimpleDateFormat("d MMM");
     private GraphView graphView;
     private LineGraphSeries series;
 
     private String TAG = "HomeFragment";
     private CalendarView mCalendarView;
-    private TextView listMakanan;
+    private TextView listMakanan, tvListMakanan, tvTotalKalori;
     private RecyclerView recyclerView;
 
-    //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
 
-
-    //sebenernya ini kdoingan nampilin kalo pas diklik tgl muncul tglnya berapa ex: klik tgl 14 May 2019 muncul 05-14-2019
-//tapi karena udah diotak atik jadi begini bang
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mCalendarView = (CalendarView) getView().findViewById(R.id.calendar_view);
-        listMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
+        tvListMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
+        tvTotalKalori = (TextView) getView().findViewById(R.id.tv_total_kalori);
 
+        graphView = getView().findViewById(R.id.graphView);
 
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -79,9 +80,6 @@ public class HomeFragment extends Fragment {
 
         });
 
-        //Buat graphView
-        graphView = getView().findViewById(R.id.graphView);
-
         series = new LineGraphSeries();
         graphView.addSeries(series);
 
@@ -91,46 +89,63 @@ public class HomeFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("journal");
 
-//        setListeners();
-
-        graphView.getGridLabelRenderer().setNumVerticalLabels(10);
-        graphView.getViewport().setScalable(true);
+        graphView.setTitle("Calories per day graph");
+        graphView.getGridLabelRenderer().setHorizontalAxisTitle("Date");
+        graphView.getGridLabelRenderer().setVerticalAxisTitle("Calories");
+        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getViewport().setYAxisBoundsManual(true);
+        graphView.getGridLabelRenderer().setNumVerticalLabels(5);
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(5);
+        graphView.getViewport().setMinX(1);
+        graphView.getViewport().setMaxX(30);
+        graphView.getViewport().setMinY(0);
+        graphView.getViewport().setMaxY(2000);
         graphView.getViewport().setScrollable(true);
         graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
-                    return sdf.format(new Date((long) value));
+                    return super.formatLabel(value, isValueX);
                 } else {
                     return super.formatLabel(value, isValueX);
                 }
             }
         });
-
     }
 
-    //ini udah pake strutktur journal, tolong diusahakan readnya yak
     private void date(final String date) {
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("journal").child(userId).child(date);
+        reference = database.getReference("journal").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists()){
-                    DataList dataList = dataSnapshot.getValue(DataList.class);
-                    String dataPerTanggal = dataSnapshot.getKey();
-                    String dataKalori = String.valueOf(dataList.getKalori());
-                    String dataBerat = String.valueOf(dataList.getBerat());
-                    listMakanan.setText("Berat = " + dataBerat + " Kalori = " + dataKalori);
+                int kalori = 0;
+                ArrayList<String> listMakanan = new ArrayList<String>();
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
+                        String inputKey = myDataSnapshot.getKey();
+                        PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
+                        String tanggal = String.valueOf(pointValue.getTanggal());
+                        if (tanggal.equals(date)) {
+                            final int kalori1 = pointValue.getKalori();
+                            final String makanan = pointValue.getNamaMakanan();
+                            if (!makanan.isEmpty())
+                                listMakanan.add(makanan);
+                            kalori = kalori + kalori1;
+                        } else {
+                            kalori = kalori + 0;
+                        }
+                        tvTotalKalori.setText("" + kalori);
+                        tvListMakanan.setText(listMakanan.toString()
+                                .replace("[", "")
+                                .replace("]",""));
+                    }
                 } else {
-                    listMakanan.setText("No data exist");
+                    tvListMakanan.setText("no data exist");
+                    tvTotalKalori.setText("no data exist");
                 }
-
-
             }
-
 
             @Override
             public void onCancelled(DatabaseError error) {
@@ -143,8 +158,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        long x = new Date().getTime();
-        String tanggal = sdf.format(x);
         reference = database.getReference("journal").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,9 +166,11 @@ public class HomeFragment extends Fragment {
                 int index = 0;
 
                 for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
-                    Toast.makeText(getActivity(), ""+sdf.format(new Date()), Toast.LENGTH_SHORT).show();
                     PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
-                    dp[index] = new DataPoint(pointValue.getxValue(), pointValue.getKalori());
+                    final int todayDate = pointValue.getTodayDate();
+                    final Date realDate = pointValue.getxValue();
+                    final int totalKalori = pointValue.getTotalKalori();
+                    dp[index] = new DataPoint(todayDate, totalKalori);
                     index++;
                 }
                 series.resetData(dp);
@@ -211,6 +226,7 @@ public class HomeFragment extends Fragment {
         final Button btnBMI = view.findViewById(R.id.btnBMI);
         final Button hasilBMI = view.findViewById(R.id.resultBMI);
         recyclerView = view.findViewById(R.id.recyclerView);
+        tvTotalKalori = view.findViewById(R.id.tv_total_kalori);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -218,7 +234,6 @@ public class HomeFragment extends Fragment {
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
-
 
         btnBMI.setOnClickListener(new View.OnClickListener() {
 
@@ -262,7 +277,7 @@ public class HomeFragment extends Fragment {
                             private String interpretBMI(float bmiValue) {
                                 if (bmiValue <= 15) {
                                     return "Very Severely Underweight";
-                                } else if (bmiValue > 15 && bmiValue <= 16) {
+                                } else if (bmiValue <= 16) {
                                     return "Severely Underweight";
                                 } else if (bmiValue > 16 && bmiValue <= 18.5) {
                                     return "Underweight";
@@ -293,7 +308,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
 
         hasilBMI.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,7 +350,7 @@ public class HomeFragment extends Fragment {
                             private String interpretBMI(float bmiValue) {
                                 if (bmiValue <= 15) {
                                     return "Very Severely Underweight";
-                                } else if (bmiValue > 15 && bmiValue <= 16) {
+                                } else if (bmiValue <= 16) {
                                     return "Severely Underweight";
                                 } else if (bmiValue > 16 && bmiValue <= 18.5) {
                                     return "Underweight";

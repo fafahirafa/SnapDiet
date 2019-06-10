@@ -13,7 +13,7 @@
     <color name="merah">#8B281F</color>
     <color name="putih">#FFF</color>
     <color name="yourSelectedColor">#D57030</color>
-    <color name="defaultColor">#989898</color>
+    <color name="defaultColor">#D57030</color>
 
 
 </resources>

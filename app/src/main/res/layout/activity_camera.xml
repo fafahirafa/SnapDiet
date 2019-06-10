@@ -43,6 +43,18 @@
             android:background="#fff"
             android:padding="20dp">
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+                <ImageView
+                    android:id="@+id/image_info"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/information" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,6 +99,11 @@
                     android:gravity="right"
                     android:text="Label Calories"
                     android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/textTotalKalori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,19 +115,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add to Journal"
-                    android:layout_marginRight="20dp"
                     android:padding="10dp"
                     android:textColor="#fff"
                     android:background="@drawable/button_oren"/>
-                <Button
-                    android:id="@+id/btn_save_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Save Photo"
-                    android:textColor="#fff"
-                    android:padding="10dp"
-                    android:background="@drawable/button_oren"
-                    android:layout_margin="20dp"/>
 
             </LinearLayout>
         </LinearLayout>
