@@ -61,6 +61,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.snapdiet.env.ImageUtils;
@@ -176,7 +177,8 @@ public abstract class CameraActivity extends AppCompatActivity
           if (totalKalori == 1)
             totalKalori = 0;
           String id = reference.push().getKey();
-          long x = new Date().getTime();
+          Calendar calendar = Calendar.getInstance();
+          Date x = calendar.getTime();
           int y = Integer.parseInt(labelScoreTextView.getText().toString());
           String namaMakanan = labelTextView.getText().toString();
           PointValue pointValue = new PointValue(x, y, y + totalKalori, 0, sdf.format(x), id, namaMakanan);

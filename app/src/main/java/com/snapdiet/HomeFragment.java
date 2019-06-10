@@ -39,20 +39,18 @@ import java.util.Date;
 
 public class HomeFragment extends Fragment {
 
-    FirebaseDatabase database;
-    DatabaseReference reference;
-    String userId;
-    SimpleDateFormat sdf = new SimpleDateFormat("M-d-yyyy");
-    SimpleDateFormat sdf1 = new SimpleDateFormat("d MMM");
-    GraphView graphView;
-    LineGraphSeries series;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    private String userId;
+    private SimpleDateFormat sdf = new SimpleDateFormat("M-d-yyyy");
+    private SimpleDateFormat sdf1 = new SimpleDateFormat("d MMM");
+    private GraphView graphView;
+    private LineGraphSeries series;
 
-    String TAG = "HomeFragment";
-    CalendarView mCalendarView;
-    TextView tvListMakanan, tvTotalKalori;
+    private String TAG = "HomeFragment";
+    private CalendarView mCalendarView;
+    private TextView tvListMakanan, tvTotalKalori;
 
-    //sebenernya ini kdoingan nampilin kalo pas diklik tgl muncul tglnya berapa ex: klik tgl 14 May 2019 muncul 05-14-2019
-//tapi karena udah diotak atik jadi begini bang
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -61,22 +59,17 @@ public class HomeFragment extends Fragment {
         tvListMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
         tvTotalKalori = (TextView) getView().findViewById(R.id.tv_total_kalori);
 
+        graphView = getView().findViewById(R.id.graphView);
 
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1 + 1) + "-" + i2 + "-" + i;
                 Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy:" + date);
-                Calendar calendar = Calendar.getInstance();
-                Date dateNow = calendar.getTime();
-                Toast.makeText(getActivity(), "" + sdf1.format(dateNow), Toast.LENGTH_SHORT).show();
                 date(date);
             }
 
         });
-
-        //Buat graphView
-        graphView = getView().findViewById(R.id.graphView);
 
         series = new LineGraphSeries();
         graphView.addSeries(series);
@@ -87,21 +80,28 @@ public class HomeFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("journal");
 
+        graphView.setTitle("Calories per day graph");
+        graphView.getGridLabelRenderer().setHorizontalAxisTitle("Date");
+        graphView.getGridLabelRenderer().setVerticalAxisTitle("Calories");
         graphView.getViewport().setXAxisBoundsManual(true);
-        graphView.getGridLabelRenderer().setNumHorizontalLabels(7);
-        graphView.getViewport().setScalable(true);
+        graphView.getViewport().setYAxisBoundsManual(true);
+        graphView.getGridLabelRenderer().setNumVerticalLabels(5);
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(5);
+        graphView.getViewport().setMinX(1);
+        graphView.getViewport().setMaxX(30);
+        graphView.getViewport().setMinY(0);
+        graphView.getViewport().setMaxY(2000);
         graphView.getViewport().setScrollable(true);
         graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
-                    return String.valueOf(value);
+                    return super.formatLabel(value, isValueX);
                 } else {
                     return super.formatLabel(value, isValueX);
                 }
             }
         });
-
     }
 
     private void date(final String date) {
@@ -159,6 +159,7 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
                     PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
                     final int todayDate = pointValue.getTodayDate();
+                    final Date realDate = pointValue.getxValue();
                     final int totalKalori = pointValue.getTotalKalori();
                     dp[index] = new DataPoint(todayDate, totalKalori);
                     index++;
@@ -223,7 +224,7 @@ public class HomeFragment extends Fragment {
                             private String interpretBMI(float bmiValue) {
                                 if (bmiValue <= 15) {
                                     return "Very Severely Underweight";
-                                } else if (bmiValue > 15 && bmiValue <= 16) {
+                                } else if (bmiValue <= 16) {
                                     return "Severely Underweight";
                                 } else if (bmiValue > 16 && bmiValue <= 18.5) {
                                     return "Underweight";
@@ -254,7 +255,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
 
         hasilBMI.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,7 +297,7 @@ public class HomeFragment extends Fragment {
                             private String interpretBMI(float bmiValue) {
                                 if (bmiValue <= 15) {
                                     return "Very Severely Underweight";
-                                } else if (bmiValue > 15 && bmiValue <= 16) {
+                                } else if (bmiValue <= 16) {
                                     return "Severely Underweight";
                                 } else if (bmiValue > 16 && bmiValue <= 18.5) {
                                     return "Underweight";

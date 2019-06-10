@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class PointValue {
 
-    long xValue;
+    Date xValue;
     int kalori, totalKalori, todayDate;
     float berat;
     String tanggal, idInput, namaMakanan;
@@ -14,25 +14,25 @@ public class PointValue {
 
     }
 
-    public PointValue(long xValue, int kalori) {
+    public PointValue(Date xValue, int kalori) {
         this.xValue = xValue;
         this.kalori = kalori;
     }
 
-    public PointValue(long xValue, int kalori, float berat) {
+    public PointValue(Date xValue, int kalori, float berat) {
         this.xValue = xValue;
         this.kalori = kalori;
         this.berat = berat;
     }
 
-    public PointValue(long xValue, int kalori, float berat, String tanggal) {
+    public PointValue(Date xValue, int kalori, float berat, String tanggal) {
         this.xValue = xValue;
         this.kalori = kalori;
         this.berat = berat;
         this.tanggal = tanggal;
     }
 
-    public PointValue(long xValue, int kalori, float berat, String tanggal, String idInput) {
+    public PointValue(Date xValue, int kalori, float berat, String tanggal, String idInput) {
         this.xValue = xValue;
         this.kalori = kalori;
         this.berat = berat;
@@ -40,7 +40,7 @@ public class PointValue {
         this.idInput = idInput;
     }
 
-    public PointValue(long xValue, int kalori, int totalKalori, float berat, String tanggal, String idInput) {
+    public PointValue(Date xValue, int kalori, int totalKalori, float berat, String tanggal, String idInput) {
         this.xValue = xValue;
         this.kalori = kalori;
         this.totalKalori = totalKalori;
@@ -50,7 +50,7 @@ public class PointValue {
         this.todayDate = new Date().getDate();
     }
 
-    public PointValue(long xValue, int kalori, int totalKalori, float berat, String tanggal, String idInput, String namaMakanan) {
+    public PointValue(Date xValue, int kalori, int totalKalori, float berat, String tanggal, String idInput, String namaMakanan) {
         this.xValue = xValue;
         this.kalori = kalori;
         this.totalKalori = totalKalori;
@@ -85,11 +85,11 @@ public class PointValue {
         this.berat = berat;
     }
 
-    public long getxValue() {
+    public Date getxValue() {
         return xValue;
     }
 
-    public void setxValue(long xValue) {
+    public void setxValue(Date xValue) {
         this.xValue = xValue;
     }
 
