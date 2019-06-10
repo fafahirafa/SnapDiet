@@ -10,6 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,21 +34,30 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import com.snapdiet.RecyclerViewAdapter;
 
 
 public class HomeFragment extends Fragment {
 
-    FirebaseDatabase database;
-    DatabaseReference reference;
-    String userId;
-    SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy");
-    GraphView graphView;
-    LineGraphSeries series;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    private String userId;
+    private SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy");
+    private GraphView graphView;
+    private LineGraphSeries series;
 
-    String TAG = "HomeFragment";
-    CalendarView mCalendarView;
-    TextView listMakanan;
+    private String TAG = "HomeFragment";
+    private CalendarView mCalendarView;
+    private TextView listMakanan;
+    private RecyclerView recyclerView;
+
+    //vars
+    private ArrayList<String> mNames = new ArrayList<>();
+    private ArrayList<Integer> mImageUrls = new ArrayList<>();
+
 
     //sebenernya ini kdoingan nampilin kalo pas diklik tgl muncul tglnya berapa ex: klik tgl 14 May 2019 muncul 05-14-2019
 //tapi karena udah diotak atik jadi begini bang
@@ -157,6 +168,40 @@ public class HomeFragment extends Fragment {
         });
     }
 
+
+    private void getImages(){
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        mImageUrls.add(R.drawable.suggestion_1);
+        mNames.add("Red Beans");
+
+        mImageUrls.add(R.drawable.suggestion_2);
+        mNames.add("Salmon");
+
+        mImageUrls.add(R.drawable.suggestion_3);
+        mNames.add("Ocha");
+
+        mImageUrls.add(R.drawable.suggestion_4);
+        mNames.add("Potato");
+
+        mImageUrls.add(R.drawable.suggestion_5);
+        mNames.add("Egg");
+
+        mImageUrls.add(R.drawable.suggestion_6);
+        mNames.add("Coffee");
+
+        mImageUrls.add(R.drawable.suggestion_7);
+        mNames.add("Almond");
+
+        mImageUrls.add(R.drawable.suggestion_8);
+        mNames.add("Berries");
+
+        mImageUrls.add(R.drawable.suggestion_9);
+        mNames.add("Avocado");
+
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -165,8 +210,18 @@ public class HomeFragment extends Fragment {
 
         final Button btnBMI = view.findViewById(R.id.btnBMI);
         final Button hasilBMI = view.findViewById(R.id.resultBMI);
+        recyclerView = view.findViewById(R.id.recyclerView);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        getImages();
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls);
+        recyclerView.setAdapter(adapter);
+
 
         btnBMI.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 final View bmiView = inflater.inflate(R.layout.popwindow_bmi, null);
