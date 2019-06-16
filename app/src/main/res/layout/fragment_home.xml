@@ -25,11 +25,6 @@
                 android:textColor="@color/merah"
                 android:textStyle="bold"
                 />
-            <ImageView
-                android:id="@+id/image_info_bmi"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/information"/>
         </LinearLayout>
         <Button
             android:id="@+id/btnBMI"
@@ -90,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center|top"
                 android:layout_weight="1">
 
                 <TextView
@@ -106,14 +101,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:gravity="center"
-                    android:text="Tap a date on calendar"/>
+                    android:hint="Tap a date on calendar"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center|top"
                 android:layout_weight="1">
 
                 <TextView
@@ -129,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:gravity="center"
-                    android:text="Tap a date on calendar"/>
+                    android:hint="Tap a date on calendar"/>
             </LinearLayout>
 
 
@@ -138,13 +133,29 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:background="#f2f2f2">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:background="#fff">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recommendations"
+            android:textSize="16sp"
+            android:textColor="@color/merah"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#fff">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

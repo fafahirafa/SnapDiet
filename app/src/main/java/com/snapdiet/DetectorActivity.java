@@ -244,31 +244,31 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                       showLabel(label);
                       switch (label) {
                         case "apple":
-                          showLabelScore("120");
+                          showLabelScore("95");
                           break;
                         case "banana":
-                          showLabelScore("100");
+                          showLabelScore("105");
                           break;
                         case "orange":
-                          showLabelScore("80");
+                          showLabelScore("62");
                           break;
                         case "broccoli":
-                          showLabelScore("150");
+                          showLabelScore("10");
                           break;
                         case "carrot":
-                          showLabelScore("110");
+                          showLabelScore("25");
                           break;
                         case "sandwich":
                           showLabelScore("250");
                           break;
                         case "pizza":
-                          showLabelScore("500");
+                          showLabelScore("324");
                           break;
                         case "cake":
-                          showLabelScore("400");
+                          showLabelScore("235");
                           break;
                         case "donut":
-                          showLabelScore("500");
+                          showLabelScore("240");
                           break;
                       }
                     }

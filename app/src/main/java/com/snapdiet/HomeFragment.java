@@ -74,6 +74,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1 + 1) + "-" + i2 + "-" + i;
+                if (date.equals(sdf.format(new Date().getTime())))
+                    showRecommendation();
+                else
+                    hideRecommendation();
                 Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy:" + date);
                 date(date);
             }
@@ -141,6 +145,8 @@ public class HomeFragment extends Fragment {
                                 .replace("[", "")
                                 .replace("]",""));
                     }
+                    if (listMakanan.isEmpty())
+                        tvListMakanan.setText("no foods");
                 } else {
                     tvListMakanan.setText("no data exist");
                     tvTotalKalori.setText("no data exist");
@@ -182,7 +188,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
 
     private void getImages(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
@@ -228,12 +233,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         tvTotalKalori = view.findViewById(R.id.tv_total_kalori);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        getImages();
-
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls);
-        recyclerView.setAdapter(adapter);
+        showRecommendation();
 
         btnBMI.setOnClickListener(new View.OnClickListener() {
 
@@ -386,4 +386,23 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void showRecommendation() {
+        String strKalori = tvTotalKalori.getText().toString();
+        if (!strKalori.isEmpty()) {
+            int kalori = Integer.parseInt(strKalori);
+            if (kalori >= 1500) {
+                recyclerView.setVisibility(View.VISIBLE);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(layoutManager);
+                getImages();
+
+                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls);
+                recyclerView.setAdapter(adapter);
+            }
+        }
+    }
+
+    private void hideRecommendation(){
+        recyclerView.setVisibility(View.GONE);
+    }
 }
