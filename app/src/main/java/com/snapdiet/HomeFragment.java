@@ -52,9 +52,10 @@ public class HomeFragment extends Fragment {
     private GraphView graphView;
     private LineGraphSeries series;
 
+    private boolean recyclerEmpty = true;
     private String TAG = "HomeFragment";
     private CalendarView mCalendarView;
-    private TextView listMakanan, tvListMakanan, tvTotalKalori;
+    private TextView listMakanan, tvListMakanan, tvTotalKalori, txtRecomendation;
     private RecyclerView recyclerView;
 
     private ArrayList<String> mNames = new ArrayList<>();
@@ -67,6 +68,7 @@ public class HomeFragment extends Fragment {
         mCalendarView = (CalendarView) getView().findViewById(R.id.calendar_view);
         tvListMakanan = (TextView) getView().findViewById(R.id.tv_list_makanan);
         tvTotalKalori = (TextView) getView().findViewById(R.id.tv_total_kalori);
+        txtRecomendation=(TextView) getView().findViewById(R.id.txtRecomendation);
 
         graphView = getView().findViewById(R.id.graphView);
 
@@ -74,8 +76,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1 + 1) + "-" + i2 + "-" + i;
-                if (date.equals(sdf.format(new Date().getTime())))
+                if (date.equals(sdf.format(new Date().getTime()))){
                     showRecommendation();
+                }
                 else
                     hideRecommendation();
                 Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy:" + date);
@@ -233,8 +236,6 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         tvTotalKalori = view.findViewById(R.id.tv_total_kalori);
 
-        showRecommendation();
-
         btnBMI.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -263,7 +264,7 @@ public class HomeFragment extends Fragment {
 
                                     float bmiValue = calculateBMI(beratValue, tinggiValue);
                                     String bmiLabel = interpretBMI(bmiValue);
-                                    hasilBMI.setText(String.valueOf(bmiLabel));
+                                    hasilBMI.setText(String.valueOf(bmiLabel) + " (" + bmiValue + ")");
                                 }
 
                                 hasilBMI.setVisibility(View.VISIBLE);
@@ -336,7 +337,7 @@ public class HomeFragment extends Fragment {
 
                                     float bmiValue = calculateBMI(beratValue, tinggiValue);
                                     String bmiLabel = interpretBMI(bmiValue);
-                                    hasilBMI.setText(String.valueOf(bmiLabel));
+                                    hasilBMI.setText(String.valueOf(bmiLabel)+ " (" + bmiValue + ")");
                                 }
 
                                 hasilBMI.setVisibility(View.VISIBLE);
@@ -394,15 +395,23 @@ public class HomeFragment extends Fragment {
                 recyclerView.setVisibility(View.VISIBLE);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(layoutManager);
-                getImages();
-
+                if (mNames.isEmpty())
+                    getImages();
                 RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls);
                 recyclerView.setAdapter(adapter);
+                txtRecomendation.setText("Here some recommendations for you");
+            }
+            if (kalori<=1500){
+                txtRecomendation.setText("Your calories are safe");
+            }
+            if (kalori>=2000){
+                txtRecomendation.setText("Stop Eating!");
             }
         }
     }
 
     private void hideRecommendation(){
         recyclerView.setVisibility(View.GONE);
+        txtRecomendation.setText("");
     }
 }

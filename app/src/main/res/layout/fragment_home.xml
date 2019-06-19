@@ -135,7 +135,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         android:orientation="vertical"
         android:background="#fff">
 
@@ -148,6 +148,17 @@
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
             />
+        <TextView
+            android:id="@+id/txtRecomendation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="@color/abutua"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
