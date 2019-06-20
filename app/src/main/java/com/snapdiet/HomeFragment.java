@@ -97,8 +97,6 @@ public class HomeFragment extends Fragment {
         reference = database.getReference("journal");
 
         graphView.setTitle("Calories per day graph");
-        graphView.getGridLabelRenderer().setHorizontalAxisTitle("Date");
-        graphView.getGridLabelRenderer().setVerticalAxisTitle("Calories");
         graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getGridLabelRenderer().setNumVerticalLabels(5);
@@ -391,27 +389,28 @@ public class HomeFragment extends Fragment {
         String strKalori = tvTotalKalori.getText().toString();
         if (!strKalori.isEmpty()) {
             int kalori = Integer.parseInt(strKalori);
+            if (kalori<=1500){
+                txtRecomendation.setText("Your calories are safe");
+            }
             if (kalori >= 1500) {
                 recyclerView.setVisibility(View.VISIBLE);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(layoutManager);
-                if (mNames.isEmpty())
+                if (mNames.isEmpty()) {
                     getImages();
+                }
                 RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls);
                 recyclerView.setAdapter(adapter);
-                txtRecomendation.setText("Here some recommendations for you");
-            }
-            if (kalori<=1500){
-                txtRecomendation.setText("Your calories are safe");
+                txtRecomendation.setText("Here are some recommendations for you");
             }
             if (kalori>=2000){
-                txtRecomendation.setText("Stop Eating!");
+                hideRecommendation();
+                txtRecomendation.setText("Your calories are over 2000! We recommend you to stop eating :)");
             }
         }
     }
 
     private void hideRecommendation(){
         recyclerView.setVisibility(View.GONE);
-        txtRecomendation.setText("");
     }
 }

@@ -139,7 +139,7 @@ public abstract class CameraActivity extends AppCompatActivity
     });
 
     addToJournalButton.setOnClickListener(new View.OnClickListener() {
-      int totalKalori;
+      int totalKalori = 1;
       @Override
       public void onClick(View v) {
         reference1.addValueEventListener(new ValueEventListener() {
@@ -161,9 +161,8 @@ public abstract class CameraActivity extends AppCompatActivity
               totalKaloriTextView.setText("" + kalori);
               totalKalori = Integer.parseInt(totalKaloriTextView.getText().toString());
             } else {
-//              Toast.makeText(CameraActivity.this, "No data exists.", Toast.LENGTH_SHORT).show();
               totalKaloriTextView.setText("1");
-              totalKalori = Integer.parseInt(totalKaloriTextView.getText().toString());
+              totalKalori = 1;
             }
           }
 
@@ -186,7 +185,8 @@ public abstract class CameraActivity extends AppCompatActivity
           Toast.makeText(CameraActivity.this, "Successfully added calories information to journal!", Toast.LENGTH_SHORT).show();
         } else {
           Toast.makeText(CameraActivity.this, "Press again to add to journal!", Toast.LENGTH_SHORT).show();
-          totalKaloriTextView.setText(""+1);
+          totalKaloriTextView.setText("1");
+          totalKalori = 1;
         }
       }
     });

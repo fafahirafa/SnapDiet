@@ -1,6 +1,8 @@
 package com.snapdiet;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,17 +17,19 @@ import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    ViewPager viewPager, viewPagerText;
-    List<Integer> dataImage = new ArrayList<>();
-    List<String> title = new ArrayList<>();
-    List<String> text = new ArrayList<>();
-    ImageView dot1,dot2,dot3;
-    Button btnGetStarted;
-    String userId;
+    private ViewPager viewPager, viewPagerText;
+    private List<Integer> dataImage = new ArrayList<>();
+    private List<String> title = new ArrayList<>();
+    private List<String> text = new ArrayList<>();
+    private ImageView dot1,dot2,dot3;
+    private Button btnGetStarted;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         setContentView(R.layout.activity_welcome);
         viewPager = findViewById(R.id.view_pager);
@@ -33,6 +37,18 @@ public class WelcomeActivity extends AppCompatActivity {
 
         Intent a = getIntent();
         userId = a.getStringExtra("userid");
+
+        SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        if(pref.getBoolean("activity_executed", false)){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userid", userId);
+            startActivity(intent);
+            finish();
+        } else {
+            SharedPreferences.Editor ed = pref.edit();
+            ed.putBoolean("activity_executed", true);
+            ed.commit();
+        }
 
         dot1= findViewById(R.id.indicator1);
         dot2= findViewById(R.id.indicator2);
@@ -88,7 +104,12 @@ public class WelcomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 intent.putExtra("userid", userId);
                 startActivity(intent);
+                SharedPreferences.Editor ed = pref.edit();
+                ed.putBoolean("activity_executed", true);
+                ed.commit();
+
             }
         });
+
     }
 }
