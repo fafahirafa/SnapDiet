@@ -60,6 +60,7 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Integer> mImageUrls = new ArrayList<>();
+    private ArrayList<String> mParagraph = new ArrayList<>();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -101,6 +102,7 @@ public class HomeFragment extends Fragment {
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getGridLabelRenderer().setNumVerticalLabels(5);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(5);
+        graphView.getGridLabelRenderer().setVerticalAxisTitle("Date");
         graphView.getViewport().setMinX(1);
         graphView.getViewport().setMaxX(30);
         graphView.getViewport().setMinY(0);
@@ -195,30 +197,60 @@ public class HomeFragment extends Fragment {
 
         mImageUrls.add(R.drawable.suggestion_1);
         mNames.add("Red Beans");
+        mParagraph.add("\n" + "The beans that are usually processed into red bean ice have benefits for losing weight. Do you know the reason? Because in every 100 grams it only contains 0.8 grams of fat and zero cholesterol! " +"\n" +
+                "\n" +"Red beans are good for maintaining heart health because in 100 grams there are at least 1406 milligrams of potassium. Besides that, diabetics can also use it to help control blood sugar levels.");
 
         mImageUrls.add(R.drawable.suggestion_2);
         mNames.add("Salmon");
+        mParagraph.add("\n" + "Salmon is rich in polyunsaturated fatty acids (PUFA) and monounsaturated fatty acids (MUFA). The content of EPA and DHA which are compounds from omega 3 fatty acids (one form of PUFA) in salmon, plays an important role for heart health and brain development.\n" +
+                "\n" +
+                "In order for a variety of nutrients to be fully utilized, salmon must be processed in the right way. Steaming or roasting for a while is the best way to maintain nutritional value, besides being eaten raw.");
 
         mImageUrls.add(R.drawable.suggestion_3);
         mNames.add("Ocha");
+        mParagraph.add("\n" + "The high antioxidant content of ocha can help fight reserves, reduce the risk of Parkinson's, ovarian cancer, colorectal cancer, skin cancer and prostate.\n" +
+                "\n" +
+                "To improve its ability to lose weight, compilation can be combined with a squeeze of lime or lemon. Get the best time to drink it. Avoid drinking ocha in the stomach because it can increase stomach acid. So, enjoy after breakfast or one hour after eating.");
 
         mImageUrls.add(R.drawable.suggestion_4);
         mNames.add("Potato");
+        mParagraph.add("\n" +
+                "Potatoes are one source of resistant starch which is very effective in helping the body burn fat. The fiber content in it is also able to provide satiety and maintain a healthy digestive system.\n" +
+                "\n" +
+                "If you want to make potatoes as a diet food, don't process them into french fries or potato chips. Simply boiled or baked before enjoying.");
 
         mImageUrls.add(R.drawable.suggestion_5);
         mNames.add("Egg");
+        mParagraph.add("\n" +
+                "Eggs are packed with proteins that can help reduce appetite. In one egg only contains 80 calories, even when fried with a little butter even the calorific value is still below 100.\n" +
+                "\n" +
+                "Enjoying one egg with a slice of whole wheat bread plus one apple seems to be the best alternative weight control food. Interested in trying it?");
 
         mImageUrls.add(R.drawable.suggestion_6);
         mNames.add("Coffee");
+        mParagraph.add("\n" +
+                "The content of caffeine in coffee is proven to accelerate the body's metabolism. By consuming just one cup, it can help the body burn as many as 26 calories.\n" +
+                "\n" +
+                "But remember, for diet drinks you should not add any ingredients to coffee such as sugar, whipped cream or sweetened condensed milk. Just enjoy coffee with its original taste that is bitter and slightly sour.");
 
         mImageUrls.add(R.drawable.suggestion_7);
         mNames.add("Almond");
+        mParagraph.add("\n" + "When feeling hungry or need snacks, just take a handful of almonds. These beans contain monounsaturated fats and polyunsaturated fats which are certainly very very reliable as a diet food while being able to help lower cholesterol.\n" +
+                "\n" +
+                "The calories are also less than other types of beans. In 1 ounce or about 23 almonds, there are only 163 calories. Not to mention the content of fiber and vitamin E in it which helps prevent constipation and maintain healthy skin.");
 
         mImageUrls.add(R.drawable.suggestion_8);
         mNames.add("Berries");
+        mParagraph.add("\n" +
+                "Fruit belonging to the family of berries such as strawberry, raspberry or blueberry tastes appropriate to be used as food for the diet. Why? because on average in one cup berries contain 4 grams of fiber and only contain 80 calories.\n" +
+                "\n" +
+                "Antioxidant compounds contained in berries are effective in preventing cancer, keeping skin healthy and reducing the risk of dementia (age-related memory decline).");
 
         mImageUrls.add(R.drawable.suggestion_9);
         mNames.add("Avocado");
+        mParagraph.add("\n" + "Avocado fruit is rich in monounsaturated fats, potassium, magnesium, folate, vitamins C and E as well as fiber which makes it has various properties for the body. One of them is to reduce excess weight.\n" +
+                "\n" +
+                "To enjoy the fruit is so simple. Simply by simply spooning the fruit or can also be processed into avocado ice which can be combined with red beans or almonds.");
 
     }
 
@@ -399,7 +431,7 @@ public class HomeFragment extends Fragment {
                 if (mNames.isEmpty()) {
                     getImages();
                 }
-                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls);
+                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls, mParagraph);
                 recyclerView.setAdapter(adapter);
                 txtRecomendation.setText("Here are some recommendations for you");
             }
