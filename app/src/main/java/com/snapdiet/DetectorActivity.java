@@ -270,6 +270,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                         case "donut":
                           showLabelScore("240");
                           break;
+                        case "hot dog":
+                          showLabelScore("290");
+                          break;
                       }
                     }
                   }
