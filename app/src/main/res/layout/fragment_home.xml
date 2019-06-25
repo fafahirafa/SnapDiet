@@ -5,14 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/putih"
     android:orientation="vertical"
-    android:paddingTop="55dp">
+    android:paddingTop="70dp"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layoutBMI"
         android:orientation="vertical"
-        android:layout_margin="20dp">
+        android:layout_marginBottom="25dp"
+        >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,30 +26,33 @@
                 android:text="@string/calculate_bmi_kg_m2"
                 android:textSize="16sp"
                 android:textColor="@color/merah"
-                android:textStyle="bold"
+
+                android:fontFamily="@font/ubuntu_bold"
                 />
         </LinearLayout>
         <Button
             android:id="@+id/btnBMI"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/press_to_enter_your_height"
+            android:text="@string/tap_bmi"
             android:background="@drawable/button"
             android:layout_marginTop="10dp"
             android:textColor="@color/putih"
             android:textSize="14sp"
             android:textStyle="italic"
+            android:fontFamily="@font/ubuntu_meditalic"
             />
         <Button
             android:id="@+id/resultBMI"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Please insert your height and weight"
+            android:text="Please input your height and weight"
             android:background="@drawable/button_oren"
             android:layout_marginTop="-50dp"
             android:textColor="@color/putih"
             android:textSize="15sp"
             android:visibility="invisible"
+            android:fontFamily="@font/ubuntu_bold"
             />
 
     </LinearLayout>
@@ -57,29 +63,34 @@
         android:layout_height="wrap_content"
         android:id="@+id/layoutCalendar"
         android:orientation="vertical"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp">
+        >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calendar"
+            android:text="Calendar Journal"
             android:textSize="16sp"
             android:textColor="@color/merah"
-            android:textStyle="bold"
+
+            android:fontFamily="@font/ubuntu_bold"
             />
 
         <CalendarView
             android:id="@+id/calendar_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_marginLeft="-20dp"
+            android:layout_marginRight="-20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,15 +104,17 @@
                     android:layout_height="wrap_content"
                     android:text="Foods"
                     android:textColor="@color/hijau"
-                    android:textSize="24sp"/>
+                    android:textSize="22sp"
+                    android:fontFamily="@font/ubuntu_med"/>
 
                 <TextView
                     android:id="@+id/tv_list_makanan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:hint="Tap a date on calendar"/>
+                    android:textSize="15sp"
+                    android:hint="Tap a date on calendar"
+                    android:fontFamily="@font/roboto_regular"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -116,15 +129,17 @@
                     android:layout_height="wrap_content"
                     android:text="Calories"
                     android:textColor="@color/orenmuda"
-                    android:textSize="24sp"/>
+                    android:textSize="22sp"
+                    android:fontFamily="@font/ubuntu_med"/>
 
                 <TextView
                     android:id="@+id/tv_total_kalori"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:hint="Tap a date on calendar"/>
+                    android:textSize="15sp"
+                    android:hint="Tap a date on calendar"
+                    android:fontFamily="@font/roboto_regular"
+                    />
             </LinearLayout>
 
 
@@ -144,9 +159,8 @@
             android:layout_height="wrap_content"
             android:text="Recommendations"
             android:textSize="16sp"
-            android:textColor="@color/merah"
-            android:textStyle="bold"
-            android:layout_marginLeft="20dp"
+            android:textColor="@color/orentua"
+            android:fontFamily="@font/ubuntu_med"
             />
         <TextView
             android:id="@+id/txtRecomendation"
@@ -155,7 +169,7 @@
             android:text=""
             android:textSize="14sp"
             android:textColor="@color/abutua"
-            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/roboto_regular"
             android:layout_marginBottom="5dp"
             />
 
@@ -164,7 +178,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:background="#fff">
+            android:background="#fff"
+            android:fontFamily="@font/roboto_regular"
+           >
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
@@ -174,23 +190,23 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:background="@color/putih"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Graph"
+            android:text="Graphic Calories"
             android:textSize="16sp"
             android:textColor="@color/merah"
-            android:textStyle="bold"
+            android:fontFamily="@font/ubuntu_bold"
+            android:layout_marginBottom="20dp"
             />
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graphView"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="250dp"
+            android:fontFamily="@font/roboto_regular"/>
     </LinearLayout>
 
 </LinearLayout>

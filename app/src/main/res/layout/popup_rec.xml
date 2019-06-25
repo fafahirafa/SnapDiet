@@ -21,7 +21,8 @@ android:layout_gravity="center">
         android:textSize="20sp"
         android:text="Salmon"
         android:textStyle="bold"
-        android:textColor="@color/abutuasekali" />
+        android:textColor="@color/abutuasekali"
+        android:fontFamily="@font/ubuntu_med"/>
 </LinearLayout>
 
 <LinearLayout
@@ -43,7 +44,8 @@ android:layout_gravity="center">
         android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/abutuamed"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_regular"/>
 </LinearLayout>
 
 </LinearLayout>

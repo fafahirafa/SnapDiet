@@ -15,7 +15,7 @@
     <string name="nav_tips">Tips</string>
     <string name="description">description</string>
     <string name="calculate_bmi_kg_m2">Calculate BMI (kg/m2)</string>
-    <string name="press_to_enter_your_height">Press to enter your height</string>
+    <string name="tap_bmi">Tap here to input your height</string>
     <string name="tips">Tips</string>
     <string name="home">Home</string>
     <string name="camera_error">Camera Error</string>

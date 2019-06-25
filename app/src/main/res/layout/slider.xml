@@ -36,7 +36,8 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/orenmuda"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/ubuntu_bold"/>
 
         <TextView
             android:id="@+id/Slider_text"
@@ -48,7 +49,8 @@
             android:textSize="20sp"
             android:text="sadsadas"
             android:textColor="@color/orenmuda"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_regular"/>
     </RelativeLayout>
 
 

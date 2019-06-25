@@ -34,13 +34,14 @@
                 android:id="@+id/name"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:fontFamily="@font/roboto_medium"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/abutuasekali"
                 android:layout_marginBottom="5dp"
                 android:autoSizeTextType="uniform"
                 android:autoSizeMinTextSize="8sp"
-                android:autoSizeMaxTextSize="15sp"/>
+                android:autoSizeMaxTextSize="15sp"
+                />
 
         </RelativeLayout>
 
