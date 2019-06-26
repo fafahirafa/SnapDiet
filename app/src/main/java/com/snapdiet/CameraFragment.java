@@ -22,7 +22,7 @@ public class CameraFragment extends Fragment {
 
         Activity activity = (MainActivity) getActivity();
         userId = ((MainActivity) activity).getUserId();
-        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), DetectorActivity.class);
         intent.putExtra("userid", userId);
         startActivity(intent);

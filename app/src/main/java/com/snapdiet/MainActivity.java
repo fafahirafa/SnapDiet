@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("journal");
 
-
-
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottomnav);
 
         BottomNavigationViewHelper.disableShiftMode(bottomNav);

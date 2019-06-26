@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (user != null) {
                     Log.d("Auth:", user.getUid());
                     userId = user.getUid();
-                    Toast.makeText(SplashActivity.this, user.getUid(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(SplashActivity.this, user.getUid(), Toast.LENGTH_SHORT).show();
                 }
             }
         };
