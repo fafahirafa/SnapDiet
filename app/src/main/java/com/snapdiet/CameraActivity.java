@@ -158,6 +158,9 @@ public abstract class CameraActivity extends AppCompatActivity
           @Override
           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             int kalori = 0;
+            if (labelScoreTextView.getText().toString() == "food calories") {
+              Toast.makeText(CameraActivity.this,"point the camera at the food!",Toast.LENGTH_SHORT).show();
+            }
             if (dataSnapshot.exists()) {
               for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
                 String inputKey = myDataSnapshot.getKey();
