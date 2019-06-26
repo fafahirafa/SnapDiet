@@ -137,7 +137,8 @@
                     android:id="@+id/textTotalKalori"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:text="1"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

@@ -75,6 +75,14 @@ public class HomeFragment extends Fragment {
 
         graphView = getView().findViewById(R.id.graphView);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        if (mNames.isEmpty()) {
+            getImages();
+        }
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls, mParagraph);
+        recyclerView.setAdapter(adapter);
+
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
@@ -430,22 +438,17 @@ public class HomeFragment extends Fragment {
         if (!strKalori.isEmpty()) {
             int kalori = Integer.parseInt(strKalori);
             if (kalori<=1500){
+                recyclerView.setVisibility(View.GONE);
                 txtRecomendation.setText("Your calories are safe");
                 txtRecomendation.setTextColor(Color.parseColor("#313131"));
             }
             if (kalori >= 1500) {
                 recyclerView.setVisibility(View.VISIBLE);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                recyclerView.setLayoutManager(layoutManager);
-                if (mNames.isEmpty()) {
-                    getImages();
-                }
-                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls, mParagraph);
-                recyclerView.setAdapter(adapter);
                 txtRecomendation.setText("Here are some recommendations for you");
                 txtRecomendation.setTextColor(Color.parseColor("#313131"));
             }
             if (kalori>=2000){
+                recyclerView.setVisibility(View.GONE);
                 hideRecommendation();
                 txtRecomendation.setText("Your calories are over 2000! We recommend you to stop eating :)");
                 txtRecomendation.setTextColor(Color.parseColor("#8B281F"));

@@ -158,9 +158,6 @@ public abstract class CameraActivity extends AppCompatActivity
           @Override
           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             int kalori = 0;
-            if (labelScoreTextView.getText().toString() == "food calories") {
-              Toast.makeText(CameraActivity.this,"point the camera at the food!",Toast.LENGTH_SHORT).show();
-            }
             if (dataSnapshot.exists()) {
               for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
                 String inputKey = myDataSnapshot.getKey();
@@ -179,29 +176,33 @@ public abstract class CameraActivity extends AppCompatActivity
               totalKaloriTextView.setText("1");
               totalKalori = 1;
             }
+
           }
 
           @Override
-          public void onCancelled(@NonNull DatabaseError databaseError) {
-
-          }
+          public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
 
-        if (totalKalori != 0) {
-          if (totalKalori == 1)
-            totalKalori = 0;
-          String id = reference.push().getKey();
-          Calendar calendar = Calendar.getInstance();
-          Date x = calendar.getTime();
-          int y = Integer.parseInt(labelScoreTextView.getText().toString());
-          String namaMakanan = labelTextView.getText().toString();
-          PointValue pointValue = new PointValue(x, y, y + totalKalori, 0, sdf.format(x), id, namaMakanan);
-          reference.child(userId).child(id).setValue(pointValue);
-          Toast.makeText(CameraActivity.this, "Successfully added calories information to journal!", Toast.LENGTH_SHORT).show();
-        } else {
-          Toast.makeText(CameraActivity.this, "Press again to add to journal!", Toast.LENGTH_SHORT).show();
-          totalKaloriTextView.setText("1");
-          totalKalori = 1;
+        if (labelScoreTextView.getText().toString().equals("food calories")) {
+          Toast.makeText(CameraActivity.this,"point the camera at the food!",Toast.LENGTH_SHORT).show();
+        }
+        else {
+          if (totalKalori != 0) {
+            if (totalKalori == 1)
+              totalKalori = 0;
+            String id = reference.push().getKey();
+            Calendar calendar = Calendar.getInstance();
+            Date x = calendar.getTime();
+            int y = Integer.parseInt(labelScoreTextView.getText().toString());
+            String namaMakanan = labelTextView.getText().toString();
+            PointValue pointValue = new PointValue(x, y, y + totalKalori, 0, sdf.format(x), id, namaMakanan);
+            reference.child(userId).child(id).setValue(pointValue);
+            Toast.makeText(CameraActivity.this, "Successfully added calories information to journal!", Toast.LENGTH_SHORT).show();
+          } else {
+            Toast.makeText(CameraActivity.this, "Press again to add to journal!", Toast.LENGTH_SHORT).show();
+            totalKaloriTextView.setText("1");
+            totalKalori = 1;
+          }
         }
       }
     });

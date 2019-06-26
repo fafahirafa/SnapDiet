@@ -64,7 +64,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(SplashActivity.this, WelcomeActivity.class);
                 intent.putExtra("userid", userId);
-                Toast.makeText(SplashActivity.this, userId, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SplashActivity.this, userId, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
             }

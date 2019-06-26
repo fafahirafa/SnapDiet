@@ -185,6 +185,7 @@
             android:orientation="horizontal"
             android:background="#fff"
             android:fontFamily="@font/roboto_medium"
+            android:visibility="gone"
            >
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
