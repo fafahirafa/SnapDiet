@@ -17,8 +17,8 @@
     <ImageView
         android:id="@+id/logoText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_orenmuda_ijo"
+        android:layout_height="75dp"
+        android:src="@drawable/text_snapdiet"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/logoImage" />

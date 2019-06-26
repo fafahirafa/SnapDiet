@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SnapDiet</string>
+    <string name="app_name">Snapdiet</string>
     <string name="slider1_title">Calculate your BMI</string>
     <string name="slider1_text">First, calculate your BMI to find out your current mass index</string>
     <string name="slider2_title">Capture your Food</string>

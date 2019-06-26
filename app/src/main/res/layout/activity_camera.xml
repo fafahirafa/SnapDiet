@@ -28,20 +28,45 @@
         android:orientation="vertical">
 
 
-
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="org.tensorflow.demo.CameraActivity" />
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/putih"
+            android:padding="10dp">
+
+
+            <ImageButton
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_cancel"
+                android:layout_marginRight="20dp"
+                android:id="@+id/btn_cancel"
+                />
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="Calorie Finder"
+                android:paddingTop="3dp"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:fontFamily="@font/ubuntu_med"
+                />
+
+        </android.support.v7.widget.Toolbar>
 
         <LinearLayout
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/putih"
+            android:background="@drawable/bg_putih"
+
             android:padding="20dp">
 
 
@@ -66,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Food name:"
+                    android:text="Food Name:"
                     android:textColor="@color/hijau"
                     android:textSize="16sp"
                     android:fontFamily="@font/ubuntu_bold"/>
@@ -124,7 +149,9 @@
                     android:id="@+id/btn_add_to_journal"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
-                    android:text="Add to Journal"
+                    android:text="+ add to journal"
+                    android:textSize="18sp"
+                    android:textAllCaps="false"
                     android:padding="1dp"
                     android:textColor="#fff"
                     android:background="@drawable/button_oren"/>

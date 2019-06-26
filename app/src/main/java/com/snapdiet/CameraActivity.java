@@ -47,6 +47,7 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -102,6 +103,8 @@ public abstract class CameraActivity extends AppCompatActivity
   private Button addToJournalButton, savePhotoButton;
   private SwitchCompat apiSwitchCompat;
 
+  ImageButton buttonCancel;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     LOGGER.d("onCreate " + this);
@@ -122,6 +125,8 @@ public abstract class CameraActivity extends AppCompatActivity
     totalKaloriTextView = findViewById(R.id.textTotalKalori);
     addToJournalButton = findViewById(R.id.btn_add_to_journal);
 
+    buttonCancel = findViewById(R.id.btn_cancel);
+
     Intent a = getIntent();
     userId = a.getStringExtra("userid");
     database = FirebaseDatabase.getInstance();
@@ -135,6 +140,13 @@ public abstract class CameraActivity extends AppCompatActivity
       public void onClick(View view) {
         Toast.makeText(CameraActivity.this, "Current detectable foods:" +
                 "banana, apple, sandwich, orange, broccoli, carrot, hot dog, pizza, donut, cake", Toast.LENGTH_SHORT).show();
+      }
+    });
+
+    buttonCancel.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        onBackPressed();
       }
     });
 

@@ -78,7 +78,7 @@
             android:id="@+id/calendar_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/roboto_regular"
+
             android:layout_marginLeft="-20dp"
             android:layout_marginRight="-20dp"/>
 
@@ -111,8 +111,10 @@
                     android:id="@+id/tv_list_makanan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:hint="Tap a date on calendar"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:hint="Tap a date on
+                     calendar"
                     android:fontFamily="@font/roboto_regular"
                     />
             </LinearLayout>
@@ -136,9 +138,12 @@
                     android:id="@+id/tv_total_kalori"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:hint="Tap a date on calendar"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:hint="Tap a date on
+                     calendar"
                     android:fontFamily="@font/roboto_regular"
+
                     />
             </LinearLayout>
 
@@ -169,7 +174,7 @@
             android:text=""
             android:textSize="14sp"
             android:textColor="@color/abutua"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/roboto_medium"
             android:layout_marginBottom="5dp"
             />
 
@@ -179,7 +184,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:background="#fff"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/roboto_medium"
            >
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
@@ -206,7 +211,8 @@
             android:id="@+id/graphView"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:fontFamily="@font/roboto_regular"/>
+
+           />
     </LinearLayout>
 
 </LinearLayout>

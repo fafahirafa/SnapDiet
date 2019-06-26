@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 
 import android.content.DialogInterface;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -148,12 +149,16 @@ public class HomeFragment extends Fragment {
                         tvListMakanan.setText(listMakanan.toString()
                                 .replace("[", "")
                                 .replace("]",""));
+                        tvListMakanan.setTextColor(Color.parseColor("#313131"));
+                        tvTotalKalori.setTextColor(Color.parseColor("#313131"));
                     }
                     if (listMakanan.isEmpty())
                         tvListMakanan.setText("no foods");
                 } else {
+
+                    tvListMakanan.setGravity(Gravity.CENTER);
                     tvListMakanan.setText("no data exist");
-                    //tvTotalKalori.setGravity(Gravity.RIGHT);
+                    tvTotalKalori.setGravity(Gravity.CENTER);
                     tvTotalKalori.setText("no data exist");
 
                 }
@@ -426,6 +431,7 @@ public class HomeFragment extends Fragment {
             int kalori = Integer.parseInt(strKalori);
             if (kalori<=1500){
                 txtRecomendation.setText("Your calories are safe");
+                txtRecomendation.setTextColor(Color.parseColor("#313131"));
             }
             if (kalori >= 1500) {
                 recyclerView.setVisibility(View.VISIBLE);
@@ -437,10 +443,12 @@ public class HomeFragment extends Fragment {
                 RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), mNames, mImageUrls, mParagraph);
                 recyclerView.setAdapter(adapter);
                 txtRecomendation.setText("Here are some recommendations for you");
+                txtRecomendation.setTextColor(Color.parseColor("#313131"));
             }
             if (kalori>=2000){
                 hideRecommendation();
                 txtRecomendation.setText("Your calories are over 2000! We recommend you to stop eating :)");
+                txtRecomendation.setTextColor(Color.parseColor("#8B281F"));
             }
         }
     }
