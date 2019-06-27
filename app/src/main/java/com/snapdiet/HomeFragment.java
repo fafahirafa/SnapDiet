@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
     private GraphView graphView;
     private LineGraphSeries series;
 
-    private boolean recyclerEmpty = true;
+    private boolean recyclerEmpty = true, pressed = false;
     private String TAG = "HomeFragment";
     private CalendarView mCalendarView;
     private TextView listMakanan, tvListMakanan, tvTotalKalori, txtRecomendation;
@@ -90,8 +90,6 @@ public class HomeFragment extends Fragment {
                 if (date.equals(sdf.format(new Date().getTime()))){
                     showRecommendation();
                 }
-                else
-                    hideRecommendation();
                 Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy:" + date);
                 date(date);
             }
@@ -183,6 +181,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        date(sdf1.format(new Date().getTime()));
         reference = database.getReference("journal").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -289,9 +288,7 @@ public class HomeFragment extends Fragment {
                 final View bmiView = inflater.inflate(R.layout.popwindow_bmi, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(inflater.getContext());
-
                 alertDialogBuilder.setView(bmiView);
-
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -339,7 +336,6 @@ public class HomeFragment extends Fragment {
                                 } else {
                                     return "Obese Level III";
                                 }
-
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -348,11 +344,8 @@ public class HomeFragment extends Fragment {
                                 dialog.cancel();
                             }
                         });
-
                 AlertDialog alertDialog = alertDialogBuilder.create();
-
                 alertDialog.show();
-
             }
         });
 
@@ -362,7 +355,6 @@ public class HomeFragment extends Fragment {
                 final View bmiView = inflater.inflate(R.layout.popwindow_bmi, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(inflater.getContext());
-
                 alertDialogBuilder.setView(bmiView);
 
                 alertDialogBuilder
@@ -412,7 +404,6 @@ public class HomeFragment extends Fragment {
                                 } else {
                                     return "Obese Level III";
                                 }
-
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -421,11 +412,8 @@ public class HomeFragment extends Fragment {
                                 dialog.cancel();
                             }
                         });
-
                 AlertDialog alertDialog = alertDialogBuilder.create();
-
                 alertDialog.show();
-
             }
         });
 
@@ -436,7 +424,7 @@ public class HomeFragment extends Fragment {
     private void showRecommendation() {
         String strKalori = tvTotalKalori.getText().toString();
         if (!strKalori.isEmpty()) {
-            int kalori = Integer.parseInt(strKalori);
+            final int kalori = Integer.parseInt(strKalori);
             if (kalori<=1500){
                 recyclerView.setVisibility(View.GONE);
                 txtRecomendation.setText("Your calories are safe");
