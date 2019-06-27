@@ -165,7 +165,7 @@ public class HomeFragment extends Fragment {
                     tvListMakanan.setGravity(Gravity.CENTER);
                     tvListMakanan.setText("no data exist");
                     tvTotalKalori.setGravity(Gravity.CENTER);
-                    tvTotalKalori.setText("no data exist");
+                    tvTotalKalori.setText("0");
 
                 }
             }
