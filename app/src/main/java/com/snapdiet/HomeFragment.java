@@ -110,11 +110,12 @@ public class HomeFragment extends Fragment {
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getGridLabelRenderer().setNumVerticalLabels(5);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(5);
-        graphView.getGridLabelRenderer().setVerticalAxisTitle("Date");
+        graphView.getGridLabelRenderer().setHorizontalAxisTitle("Date");
+        graphView.getGridLabelRenderer().setVerticalAxisTitle("Calories");
         graphView.getViewport().setMinX(1);
         graphView.getViewport().setMaxX(30);
         graphView.getViewport().setMinY(0);
-        graphView.getViewport().setMaxY(2000);
+        graphView.getViewport().setMaxY(3000);
         graphView.getViewport().setScrollable(true);
         graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
